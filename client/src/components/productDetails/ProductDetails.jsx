@@ -1,111 +1,138 @@
-import React, { useEffect, useState } from 'react'
-import './ProductDetails.css'
+import React, { useEffect, useState } from "react";
+import "./ProductDetails.css";
+import Header from "../Header/Header";
 
-import {
-  BsInstagram,
-  BsFacebook,
-  BsTwitter,
-  BsWhatsapp,
-  BsCheckCircleFill,
-  BsFillCartFill,
-} from 'react-icons/bs'
-import { FaHeart } from 'react-icons/fa'
-import { useLocation } from 'react-router-dom'
-import axios from 'axios'
+import { MdLocationPin } from "react-icons/md";
+import { FaUserCircle, FaCheck } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+import { vars } from "../../constants/variables";
+
 
 export default function ProductDetails() {
-  const { pathname } = useLocation()
-  const [product, setProduct] = useState([])
+  const { pathname } = useLocation();
+  const [product, setProduct] = useState([]);
+  const [isActive, setIsActive] = useState(false);
 
-  const productId = pathname.split('/')[3]
+  const toggleClass = () => {
+    setIsActive(!isActive);
+  };
 
-  console.log(productId)
+
+  const productId = pathname.split("/")[3];
+
+  console.log(productId);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(
-          'https://b18d-2a00-cc47-232c-1101-00-11aa.ngrok-free.app/products'
-        )
+        const res = await axios.get(`${vars.API}/products`);
         const filteredProduct =
-          res.data && res.data.filter((item) => item.id === +productId)
-        setProduct(filteredProduct[0])
+          res.data && res.data.filter((item) => item.id === +productId);
+        setProduct(filteredProduct[0]);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
-    fetchProduct()
-  }, [productId])
+    };
+    fetchProduct();
+  }, [productId]);
+
+
 
   return (
-    <div className="productPage">
-      <div class="card-wrapper">
-        <div class="card">
-          <div class="product-imgs">
-            <div class="img-display">
-              <div class="img-showcase">
-                <img src={product?.image} alt="shoe" />
+    <>
+      <Header />
+      <div className="productPage">
+        <div className="card-wrapper">
+          <div className="card">
+            <div className="img-display">
+              <div className="img-showcase">
+                <img src={product?.image} alt="img" />
               </div>
             </div>
-            {/* <div class="img-select">
-              <div class="img-item">
-                <img data-id="1" src={product?.image} alt="shoe" />
-              </div>
-            </div> */}
-          </div>
 
-          <div class="product-content">
-            <h2 class="product-title">{product?.label}</h2>
-            <div class="product-price">
-              <p class="price">
-                Price:{' '}
-                <span>
-                  {product?.currency} {product?.price}
+            <div className="menu">
+              <div className="purchase-info">
+                <div className="fav" onClick={toggleClass}>
+                  <FaHeart
+                    className={!isActive ? "fav-icon" : "fav-icon_active"}
+                  />
+                </div>
+                <div className="user-info">
+                  <div className="user-img">
+                    <FaUserCircle className="user-icon" />
+                  </div>
+                  <div className="user-name">User Name</div>
+                  <div className="since">On 'title' since 'time'</div>
+                </div>
+                <div className="btns">
+                  <button type="button" class="btn btn-now">
+                    Contact
+                  </button>
+                  <button className="btn btn-fav">Favourite</button>
+                </div>
+              </div>
+              <div className="additions">
+                <div className="to-top addition">
+                  <FaCheck className="check-icon" />
+                  <p>Top</p>
+                </div>
+                <div className="to-home addition">
+                  <FaCheck className="check-icon" />
+                  <p>Home</p>
+                </div>
+                <div className="to-urgently addition">
+                  <FaCheck className="check-icon" />
+                  <p>Urgently</p>
+                </div>
+              </div>
+              <div className="samilar-products-div">
+                <p>Samilar Adverts</p>
+                <div className="samilar-products">
+                  <div className="samilar-product">
+                    <img src={product?.image} alt="img" />
+                    <div className="samilar-product-text">
+                      <div className="samilar-product-title">
+                        {" "}
+                        {product?.label}
+                      </div>
+                      <div className="samilar-product-price">
+                        {" "}
+                        {product?.currency === "USD" ? "$" : "֏"}
+                        {product?.price}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="product-content">
+              <h2 className="product-title">{product?.label}</h2>
+              <div className="product-location">
+                <span className="location">
+                  <MdLocationPin className="loc-icon" />{" "}
                 </span>
-              </p>
-            </div>
+                <span className="loc-name">{product?.location}</span>
+              </div>
+              <div className="product-price">
+                <p className="price">
+                  <span>
+                    Price: {product?.currency === "USD" ? "$" : "֏"}
+                    {product?.price}
+                  </span>
+                </p>
+              </div>
 
-            <div class="product-detail">
-              <h2>about item: </h2>
-              <p>{product?.description}</p>
-              <ul>
-                <li>
-                  <BsCheckCircleFill className="details-icons" /> Color:{' '}
-                  <span>Black</span>
-                </li>
-                <li>
-                  <BsCheckCircleFill className="details-icons" />
-                  Available: <span>in stock</span>
-                </li>
-                <li>
-                  <BsCheckCircleFill className="details-icons" />
-                  Category: <span>Shoes</span>
-                </li>
-                <li>
-                  <BsCheckCircleFill className="details-icons" />
-                  Shipping Area: <span>All over the world</span>
-                </li>
-                <li>
-                  <BsCheckCircleFill className="details-icons" />
-                  Shipping Fee: <span>Free</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="purchase-info">
-              <button type="button" class="btn btn-add">
-                Add to Cart
-              </button>
-              <button type="button" class="btn btn-now">
-                Call
-              </button>
-              <button class="btn-fav">
-                <FaHeart />
-              </button>
+              <div className="product-detail">
+                <h2>about item: </h2>
+                <p className="product-description">{product?.description}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  )
+    </>
+  );
 }

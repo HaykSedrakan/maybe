@@ -1,48 +1,49 @@
-import React, { useState } from 'react'
-import './SearchBar.css'
-import SearchIcon from '@mui/icons-material/Search'
-import CloseIcon from '@mui/icons-material/Close'
-import axios from 'axios'
-import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from "react";
+import "./SearchBar.css";
+import SearchIcon from "@mui/icons-material/Search";
+import CloseIcon from "@mui/icons-material/Close";
+import axios from "axios";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { vars } from "../../constants/variables";
 
 function SearchBar() {
-  const [filteredData, setFilteredData] = useState([])
-  const [wordEntered, setWordEntered] = useState('')
-  const [products, setProducts] = useState([])
+  const [filteredData, setFilteredData] = useState([]);
+  const [wordEntered, setWordEntered] = useState("");
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get('http://localhost:3020/products')
-        res.data && setProducts(res.data)
+        const res = await axios.get(`${vars.API}/products`);
+        res.data && setProducts(res.data);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
-    fetchProducts()
-  }, [])
+    };
+    fetchProducts();
+  }, []);
 
   const handleFilter = (event) => {
-    const searchWord = event.target.value
-    setWordEntered(searchWord)
+    const searchWord = event.target.value;
+    setWordEntered(searchWord);
     const newFilter =
       products &&
       products.filter((value) => {
-        return value.label.toLowerCase().includes(searchWord.toLowerCase())
-      })
+        return value.label.toLowerCase().includes(searchWord.toLowerCase());
+      });
 
-    if (searchWord === '') {
-      setFilteredData([])
+    if (searchWord === "") {
+      setFilteredData([]);
     } else {
-      setFilteredData(newFilter)
+      setFilteredData(newFilter);
     }
-  }
+  };
 
   const clearInput = () => {
-    setFilteredData([])
-    setWordEntered('')
-  }
+    setFilteredData([]);
+    setWordEntered("");
+  };
 
   return (
     <div className="searchBar-div">
@@ -68,12 +69,12 @@ function SearchBar() {
               <Link className="dataItem" to={`/product/details/${value.id}`}>
                 <p>{value.label}</p>
               </Link>
-            )
+            );
           })}
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default SearchBar
+export default SearchBar;

@@ -1,35 +1,37 @@
-import React, { useState } from 'react'
-import './Header.css'
-import SideNavigation from '../SideNav/sidenav'
-import { RiShoppingCartLine } from 'react-icons/ri'
-import { MdLanguage } from 'react-icons/md'
-import ProductCard from '../ProductCard/ProductCard'
-import styles from './Menu.module.css'
-import { FaUserAlt } from 'react-icons/fa'
-import { FiSettings } from 'react-icons/fi'
-import { TbLogout } from 'react-icons/tb'
-import axios from 'axios'
-import SearchBar from '../SearchBar/SearchBar'
-import useUser from '../../hooks/useUser'
+import React, { useState } from "react";
+import "./Header.css";
+import SideNavigation from "../SideNav/sidenav";
+import { RiShoppingCartLine } from "react-icons/ri";
+import { MdLanguage } from "react-icons/md";
+import ProductCard from "../ProductCard/ProductCard";
+import styles from "./Menu.module.css";
+import { FaUserAlt } from "react-icons/fa";
+import { FiSettings } from "react-icons/fi";
+import { TbLogout } from "react-icons/tb";
+import axios from "axios";
+import SearchBar from "../SearchBar/SearchBar";
+import useUser from "../../hooks/useUser";
+import { vars } from "../../constants/variables";
+import { Link } from "react-router-dom";
 
 // import SideNavigation from "../sidenav";
 
 export default function Header() {
-  const [active, setActive] = useState(false)
-  const { isAuth, user } = useUser()
+  const [active, setActive] = useState(false);
+  const { isAuth, user } = useUser();
 
   const handleClickMenu = () => {
-    setActive(!active)
-  }
+    setActive(!active);
+  };
 
   async function handleLogout() {
     await axios
-      .post('https://6bf6-2a00-cc47-232c-1101-00-11aa.ngrok-free.app/logout')
-      .then(() => console.log('User has been logout successfully!'))
-      .catch((err) => console.log(err))
+      .post(`${vars.API}/logout`)
+      .then(() => console.log("User has been logout successfully!"))
+      .catch((err) => console.log(err));
   }
 
-  console.log(user, isAuth)
+  console.log(user, isAuth);
   return (
     <>
       <header className="header">
@@ -37,7 +39,10 @@ export default function Header() {
           <SideNavigation />
         </div>
         <div className="navbar-div">
-          <span className="navbar-span">Home</span>
+          <Link to='/'>
+            
+            <span className="navbar-span">Home</span>
+          </Link>
           <span className="navbar-span">Contact</span>
         </div>
         <div className="searchBar-div">
@@ -74,7 +79,6 @@ export default function Header() {
           </div>
         </div>
       </header>
-      <ProductCard />
     </>
-  )
+  );
 }
