@@ -1,40 +1,39 @@
-import styles from "./Registration.module.css";
-import { HiLockClosed } from "react-icons/hi";
-import TextField from "@mui/material/TextField";
-import { RiAdminFill } from "react-icons/ri";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useState } from "react";
-import Box from "@mui/material/Box";
-import { vars } from "../../constants/variables";
+import styles from './Registration.module.css'
+import { HiLockClosed } from 'react-icons/hi'
+import TextField from '@mui/material/TextField'
+import { RiAdminFill } from 'react-icons/ri'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { useState } from 'react'
+import Box from '@mui/material/Box'
 
 export default function Registration() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const [values, setValues] = useState({
-    name: "",
-    email: "",
-    password: "",
+    name: '',
+    email: '',
+    password: '',
     age: 0,
-  });
+  })
   const handleChange = (e) => {
-    setValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+    setValues((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  }
 
-  console.log(values);
+  console.log(values)
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     axios
-      .post(`${vars.API}/reegister`, values)
+      .post('http://localhost:3020/register', values)
       .then((res) => {
-        if (res.data.Status === "Success") {
-          navigate("/login");
+        if (res.data.Status === 'Success') {
+          navigate('/login')
         } else {
-          alert("Error !");
+          alert('Error !')
         }
       })
-      .catch((err) => console.log(err));
-  };
+      .catch((err) => console.log(err))
+  }
 
   return (
     <>
@@ -54,7 +53,7 @@ export default function Registration() {
                 label="Name"
                 multiline
                 maxRows={4}
-                sx={{ width: "400px" }}
+                sx={{ width: '400px' }}
               />
             </div>
             <div className={styles.textFieldContainer}>
@@ -65,7 +64,7 @@ export default function Registration() {
                 label="E-Mail"
                 multiline
                 maxRows={4}
-                sx={{ width: "400px" }}
+                sx={{ width: '400px' }}
               />
             </div>
             <div className={styles.textFieldContainer}>
@@ -76,7 +75,7 @@ export default function Registration() {
                 label="Password"
                 multiline
                 maxRows={4}
-                sx={{ width: "400px" }}
+                sx={{ width: '400px' }}
               />
             </div>
             <div className={styles.textFieldContainer}>
@@ -95,5 +94,5 @@ export default function Registration() {
         </div>
       </div>
     </>
-  );
+  )
 }

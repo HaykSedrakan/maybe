@@ -1,0 +1,499 @@
+main {
+    background: #f3f4f6;
+    grid-area: main;
+    overflow-y: auto;
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.box {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.mainTitle {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.mainTitle>img {
+    max-height: 100px;
+    object-fit: contain;
+    margin-right: 20px;
+}
+
+.mainGreeting>h1 {
+    font-size: 24px;
+    color: #2e4a66;
+    margin-bottom: 5px;
+}
+
+.mainGreeting>p {
+    font-size: 14px;
+    font-weight: 700;
+    color: #a5aaad;
+}
+
+.mainCards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 30px;
+    margin: 20px 0;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 70px;
+    padding: 25px;
+    border-radius: 5px;
+    background: #ffffff;
+    box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
+}
+
+.cardInner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cardInner>span {
+    font-size: 25px;
+}
+
+.charts {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.chartsLeft {
+    padding: 25px;
+    border-radius: 5px;
+    background: #ffffff;
+    box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.chartsLeftTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chartsLeftTitle>div>h1 {
+    font-size: 24px;
+    color: #2e4a66;
+    margin-bottom: 5px;
+}
+
+.chartsLeftTitle>div>p {
+    font-size: 14px;
+    font-weight: 700;
+    color: #a5aaad;
+}
+
+.chartsLeftTitle>.icon {
+    color: #ffffff;
+    font-size: 20px;
+    background: #ffc100;
+    border-radius: 200px 0px 200px 200px;
+    -moz-border-radius: 200px 0px 200px 200px;
+    -webkit-border-radius: 200px 0px 200px 200px;
+    border: 0px solid #000000;
+    padding: 15px;
+}
+
+.chartsRight {
+    padding: 25px;
+    border-radius: 5px;
+    background: #ffffff;
+    box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
+}
+
+.chartsRightTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chartsRightTitle>div>h1 {
+    font-size: 24px;
+    color: #2e4a66;
+    margin-bottom: 5px;
+}
+
+.chartsRightTitle>div>p {
+    font-size: 14px;
+    font-weight: 700;
+    color: #a5aaad;
+}
+
+.chartsRightTitle>i {
+    color: #ffffff;
+    font-size: 20px;
+    background: #39447a;
+    border-radius: 200px 0px 200px 200px;
+    -moz-border-radius: 200px 0px 200px 200px;
+    -webkit-border-radius: 200px 0px 200px 200px;
+    border: 0px solid #000000;
+    padding: 15px;
+}
+
+.chartsRightCards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.mainAddbox {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+
+.add {
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #3b9668;
+    cursor: pointer;
+}
+
+.addIcon {
+    font-size: 16px;
+    color: #3b9668;
+    cursor: pointer;
+}
+
+:root {
+    --blue: #0071FF;
+    --light-blue: #B6DBF6;
+    --dark-blue: #005DD1;
+    --grey: #f2f2f2;
+}
+
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    width: 100%;
+    background: #fff;
+    padding: 30px;
+    border-radius: 30px;
+}
+
+.imgArea {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    background: var(--grey);
+    margin-bottom: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.imgArea .icon {
+    font-size: 100px;
+}
+
+.imgArea h3 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.imgArea p {
+    color: #999;
+}
+
+.imgArea p span {
+    font-weight: 600;
+}
+
+.imgArea img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 100;
+}
+
+.imgArea::before {
+    content: attr(data-img);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: all .3s ease;
+    z-index: 200;
+}
+
+.imgArea.active:hover::before {
+    opacity: 1;
+}
+
+.selectImage {
+    display: block;
+    width: 100%;
+    padding: 16px 0;
+    border-radius: 15px;
+    background: var(--blue);
+    color: #fff;
+    font-weight: 500;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: all .3s ease;
+    margin-bottom: 20px;
+}
+
+.selectImage:hover {
+    background: var(--dark-blue);
+}
+
+.btnContainer {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.addBtn {
+    display: block;
+    width: 50%;
+    padding: 8px 0;
+    border-radius: 15px;
+    background: #3ea175;
+    color: #fff;
+    font-weight: 500;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.addBtn:hover {
+    opacity: .8;
+}
+
+.img {
+    object-fit: cover;
+    height: 300px;
+    width: 600px;
+}
+
+.delete {
+    align-self: center;
+    padding: 0.5rem;
+    background-color: white;
+    border: none;
+    transition: 0.2s;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    border-radius: 3px;
+    color: crimson;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.delete:hover {
+    background-color: #db0e7f1a;
+    transform: scale(1.1);
+}
+
+.edit {
+    padding: 0.5rem;
+    background-color: white;
+    border: none;
+    transition: 0.2s;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    border-radius: 3px;
+    color: orange;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.edit:hover {
+    background-color: #d8751f1a;
+    transform: scale(1.1);
+}
+
+.btnContainer {
+    display: flex;
+    flex-direction: column;
+    margin-left: 100px;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.btns {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 200px;
+}
+
+
+.editBtn {
+    display: block;
+    width: 50%;
+    padding: 8px 0;
+    border-radius: 15px;
+    background: #bccf14e2 !important;
+    color: #fff;
+    font-weight: 500;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.editBtn:hover {
+    opacity: .8;
+}
+
+.emptyBanersContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.empty {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    min-height: 200px;
+}
+
+@media (max-width:800px) {
+
+    .img {
+        object-fit: cover;
+        height: 300px;
+        width: 500px;
+    }
+}
+
+@media (max-width:690px) {
+
+    .img {
+        object-fit: cover;
+        height: 280px;
+        width: 450px;
+    }
+}
+
+@media (max-width:639px) {
+
+    .img {
+        object-fit: cover;
+        height: 280px;
+        width: 400px;
+    }
+}
+
+@media (max-width:590px) {
+
+    .img {
+        object-fit: cover;
+        height: 250px;
+        width: 370px;
+    }
+}
+
+@media (max-width:564px) {
+
+    .img {
+        object-fit: cover;
+        height: 230px;
+        width: 350px;
+    }
+}
+
+@media (max-width:543px) {
+
+    .img {
+        object-fit: cover;
+        height: 200px;
+        width: 300px;
+    }
+}
+
+@media (max-width:485px) {
+
+    .img {
+        object-fit: cover;
+        height: 200px;
+        width: 250px;
+    }
+}
+
+@media (max-width:441px) {
+
+    .img {
+        object-fit: cover;
+        height: 200px;
+        width: 200px;
+    }
+}
+
+@media (max-width:392px) {
+    .chartsLeft {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    .chartsLeft {
+        padding: 0;
+        padding-top: 10px;
+        border-radius: 5px;
+        background: #ffffff;
+        box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
+        min-width: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .img {
+        object-fit: cover;
+        height: 150px;
+        width: 150px;
+    }
+
+    .delete {
+        margin-top: 10px;
+    }
+}

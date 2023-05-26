@@ -1,28 +1,27 @@
-import { useState, useEffect, useRef } from "react";
-import axios from "axios";
-import { vars } from "../constants/variables";
+import { useState, useEffect, useRef } from 'react'
+import axios from 'axios'
 
 const useProducts = (limit) => {
-  const [products, setProducts] = useState([]);
-  const isInitialMount = useRef(true);
+  const [products, setProducts] = useState([])
+  const isInitialMount = useRef(true)
 
   useEffect(() => {
     if (isInitialMount.current) {
-      isInitialMount.current = false;
+      isInitialMount.current = false
       const fetchProducts = async () => {
         try {
-          const res = await axios.get(`${vars.API}/products`);
-          const limitedProducts = res.data.slice(0, limit);
-          setProducts(limitedProducts);
+          const res = await axios.get(`${process.env.REACT_APP_API}/products`);
+          const limitedProducts = res.data.slice(0, limit)
+          setProducts(limitedProducts)
         } catch (error) {
-          console.log(error);
+          console.log(error)
         }
-      };
-      fetchProducts();
+      }
+      fetchProducts()
     }
-  }, [limit]);
+  }, [limit])
 
-  return products;
-};
+  return products
+}
 
-export default useProducts;
+export default useProducts

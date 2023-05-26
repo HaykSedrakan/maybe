@@ -13,7 +13,7 @@ const app = express()
 
 app.use(express.json())
 app.use(cors({
-    origin: ["http://localhost:3000", "https://ad17-2a00-cc47-232c-1101-00-11aa.ngrok-free.app"],
+    origin: ["http://localhost:3000", "https://9c3d-2a00-cc47-232c-1101-00-11aa.ngrok-free.app"],
     methods: ["PUT", "POST", "GET", "DELETE"],
     credentials: true
 }));
@@ -28,12 +28,12 @@ const db = mysql.createConnection({
 });
 
 app.post('/register', (req, res) => {
-    const q = 'INSERT INTO users (`name`, `email`, `password`, `phoneNumber`) VALUES (?)'
+    const q = 'INSERT INTO users (`name`, `email`, `password`, `phoneNumber`, `date`) VALUES (?)'
     bcrypt.hash(req.body.password.toString(), salt, (err, hash) => {
         if (err) return res.json({
             Error: 'Error for hassing password'
         })
-        const values = [req.body.name, req.body.email, hash, req.body.phoneNumber]
+        const values = [req.body.name, req.body.email, hash, req.body.phoneNumber, req.body.date]
 
         db.query(q, [values], (err, data) => {
             if (err) return res.json({
@@ -136,7 +136,10 @@ app.get('/isAuth', verifyUser, (req, res) => {
 
 
 app.post('/logout', (req, res) => {
-    res.clearCookie('token')
+    res.clearCookie('token', {
+        sameSite: 'none',
+        secure: true
+    })
     return res.json({
         Status: 'Success'
     })
@@ -178,6 +181,32 @@ app.delete('/deleteCategory/:id', (req, res) => {
     })
 })
 
+
+app.post('/addbaner', (req, res) => {
+    const q = 'INSERT INTO baners (`img`) VALUES (?)'
+
+    db.query(q, [req.body.img], (err, data) => {
+        return err ? res.send(err) : res.send('Baner has been created success')
+    })
+})
+
+app.get('/baners', (req, res) => {
+    const q = "SELECT * FROM baners"
+
+    db.query(q, (err, data) => {
+        return err ? res.send(err) : res.send(data)
+    })
+})
+
+app.delete('/deletebaner/:id', (req, res) => {
+    const q = 'DELETE FROM baners WHERE id = ?'
+    const banerid = req.params.id
+
+    db.query(q, [banerid], (err, data) => {
+        return err ? res.send(err) : res.send('Baner has been delete success')
+    })
+})
+
 app.get('/products', (req, res) => {
     const q = 'SELECT * FROM items'
 
@@ -185,6 +214,93 @@ app.get('/products', (req, res) => {
         return err ? res.send(err) : res.send(data)
     })
 })
+
+
+app.get('/users', (req, res) => {
+    const q = 'SELECT * FROM users'
+
+    db.query(q, (err, data) => {
+        return err ? res.send(err) : res.send(data)
+    })
+})
+
+app.put('/edituser/:id', (req, res) => {
+    const userId = req.params.id;
+
+    const values = [];
+    const params = [];
+
+    if (req.body.name) {
+        values.push(`name = ?`);
+        params.push(req.body.name);
+    }
+
+    if (req.body.avatar) {
+        values.push(`avatar = ?`);
+        params.push(req.body.avatar);
+    }
+    if (req.body.phoneNumber) {
+        values.push(`phoneNumber = ?`);
+        params.push(req.body.phoneNumber);
+    }
+    if (req.body.bio) {
+        values.push(`bio = ?`);
+        params.push(req.body.bio);
+    }
+    if (req.body.email) {
+        values.push(`email = ?`);
+        params.push(req.body.email);
+    }
+
+    if (values.length === 0) {
+        return res.send('No fields to update');
+    }
+
+    params.push(userId);
+
+    const q = `UPDATE users SET ${values.join(', ')} WHERE id = ?`;
+
+    db.query(q, params, (err, data) => {
+        if (err) {
+            return res.send(err);
+        }
+
+        // Обновление JWT с новым именем пользователя
+        const name = req.body.name;
+        const token = jwt.sign({
+            name
+        }, "aca-project-jwt-token", {
+            expiresIn: '10d'
+        });
+        res.cookie('token', token, {
+            sameSite: 'none',
+            secure: true
+        });
+
+        return res.send('User has been updated successfully!');
+    });
+});
+
+app.post('/addFavourite/user/:id', (req, res) => {
+    const userId = req.params.id;
+    const favourite = req.body.favourite;
+
+    if (!favourite) {
+        return res.send('No fields to update');
+    }
+
+    const q = `UPDATE users SET favourite = ? WHERE id = ?`;
+
+    db.query(q, [favourite, userId], (err, data) => {
+        if (err) {
+            return res.send(err);
+        }
+
+        return res.send('User favorites added successfully');
+    });
+});
+
+
 
 
 app.listen(process.env.PORT || 3030, () => {

@@ -7,7 +7,6 @@ import { FaUserCircle, FaCheck } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { vars } from "../../constants/variables";
 
 
 export default function ProductDetails() {
@@ -27,7 +26,7 @@ export default function ProductDetails() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`${vars.API}/products`);
+        const res = await axios.get(`${process.env.REACT_APP_API}/products`);
         const filteredProduct =
           res.data && res.data.filter((item) => item.id === +productId);
         setProduct(filteredProduct[0]);

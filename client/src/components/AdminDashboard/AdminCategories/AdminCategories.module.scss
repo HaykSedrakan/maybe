@@ -1,0 +1,39 @@
+.chartsRightCards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.card {
+    margin-top: 100px;
+    background: #d1ecf1;
+    color: #35a4ba;
+    text-align: center;
+    padding: 25px;
+    min-width: 200px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.titleModal {
+    display: flex;
+    justify-content: center;
+    font-weight: 400;
+    font-size: 20px;
+    margin-bottom: 50px;
+}
+
+.addInpCateogoryContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.sendButtonContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.myToast {
+    font-size: 16px;
+}

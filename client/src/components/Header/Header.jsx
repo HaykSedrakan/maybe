@@ -11,28 +11,35 @@ import { TbLogout } from "react-icons/tb";
 import axios from "axios";
 import SearchBar from "../SearchBar/SearchBar";
 import useUser from "../../hooks/useUser";
-import { vars } from "../../constants/variables";
 import { Link } from "react-router-dom";
-import "../SearchBar/SearchBar.css"
-
+import "../SearchBar/SearchBar.css";
+import { useNavigate } from 'react-router-dom'
+import Banner from '../Baner/Baner'
 // import SideNavigation from "../sidenav";
 
 export default function Header() {
-  const [active, setActive] = useState(false);
-  const { isAuth, user } = useUser();
+  const navigate = useNavigate()
+  const [active, setActive] = useState(false)
+  const { isAuth, user } = useUser()
 
   const handleClickMenu = () => {
-    setActive(!active);
-  };
+    setActive(!active)
+  }
 
   async function handleLogout() {
     await axios
-      .post(`${vars.API}/logout`)
-      .then(() => console.log("User has been logout successfully!"))
-      .catch((err) => console.log(err));
+      .post(`${process.env.REACT_APP_API}/logout`, {
+        withCredentials: true,
+        sameSite: 'none',
+      })
+      .then(() => console.log('User has been logout successfully!'))
+      .catch((err) => console.log(err))
   }
 
-  console.log(user, isAuth);
+  const handleNavigate = () => {
+    navigate('/login/auth')
+  }
+
   return (
     <>
       <header className="header">
@@ -40,8 +47,14 @@ export default function Header() {
           <SideNavigation />
         </div>
         <div className="navbar-div">
-          <Link to='/' className="navbar-link-home">
-            <span className="navbar-span">Home</span>
+          <Link className="navbar-span" to="/">
+            <span>Trade</span>
+            {/* <img
+              className={styles.siteLogo}
+              src="/image/icons/logo.jpeg"
+              alt="LOGO"
+            /> */}
+            <span>Verse</span>
           </Link>
           <span className="navbar-span">Contact</span>
         </div>
@@ -57,28 +70,52 @@ export default function Header() {
           <div className="user-div">
             <div className={styles.action} onClick={handleClickMenu}>
               <div className={styles.profile}>
-                <img src="./assets/avatar.jpg" />
+                <img
+                  src={
+                    !user?.avatar?.jpeg
+                      ? '/image/icons/defaultavata.webp'
+                      : user?.avatar?.jpeg
+                  }
+                />
               </div>
               <div className={`${styles.menu} ${active && styles.active}`}>
                 <ul>
-                  <li>
-                    <FaUserAlt className={styles.icon} />
-                    <a href="#">My profile</a>
-                  </li>
-                  <li>
-                    <FiSettings className={styles.icon} />
-                    <a href="#">Edit profile</a>
-                  </li>
-                  <li>
-                    <TbLogout className={styles.icon} />
-                    <a onClick={handleLogout}>Logout</a>
-                  </li>
+                  {isAuth ? (
+                    <>
+                      <li>
+                        <a href="#">{user?.name}</a>
+                      </li>
+                      <li>
+                        <FaUserAlt className={styles.icon} />
+                        <a href="#">Мy officee</a>
+                      </li>
+                      <li>
+                        <FaUserAlt className={styles.icon} />
+                        <Link to="/my/favorites/products">Мy Favorites</Link>
+                      </li>
+                      <li>
+                        <FiSettings className={styles.icon} />
+                        <Link to={`/user/${user.id}/account/settings`}>
+                          Settings
+                        </Link>
+                      </li>
+                      <li>
+                        <TbLogout className={styles.icon} />
+                        <a onClick={handleLogout}>Logout</a>
+                      </li>
+                    </>
+                  ) : (
+                    <li onClick={handleNavigate} style={{ cursor: 'pointer' }}>
+                      Login / Auth
+                    </li>
+                  )}
                 </ul>
               </div>
             </div>
           </div>
         </div>
       </header>
+      <Banner />
     </>
-  );
+  )
 }

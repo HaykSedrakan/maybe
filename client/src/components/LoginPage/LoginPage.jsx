@@ -9,7 +9,7 @@ import { useState } from "react";
 import axios from "axios";
 import { MdOutlineAccountCircle, MdAlternateEmail } from "react-icons/md";
 import { BsFillKeyFill, BsTelephoneFill } from "react-icons/bs";
-import { vars } from "../../constants/variables";
+import dayjs from "dayjs"
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -22,6 +22,7 @@ export default function LoginPage() {
     password: "",
     name: "",
     phoneNumber: "",
+    date: dayjs().format("DD.MM.YYYY")
   });
   const [completedAuth, setCompleteAuth] = useState(false);
 
@@ -38,7 +39,7 @@ export default function LoginPage() {
     e.preventDefault();
 
     axios
-      .post(`${vars.API}/login`, loginValues && loginValues, {
+      .post(`${process.env.REACT_APP_API}/login`, loginValues && loginValues, {
         withCredentials: true,
         sameSite: "none",
       })
@@ -56,14 +57,16 @@ export default function LoginPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post(`${vars.API}/register`, authValues && authValues).then((res) => {
-      if (res.data.Status === "Success") {
-        navigate("/login");
-        setCompleteAuth(true);
-      } else {
-        alert("Error !");
-      }
-    });
+    axios
+      .post(`${process.env.REACT_APP_API}/register`, authValues && authValues)
+      .then((res) => {
+        if (res.data.Status === "Success") {
+          navigate("/login");
+          setCompleteAuth(true);
+        } else {
+          alert("Error !");
+        }
+      });
   };
 
   return (

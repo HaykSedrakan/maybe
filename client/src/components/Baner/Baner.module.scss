@@ -1,0 +1,30 @@
+// .dot {
+//     width: 20px;
+//     height: 30px;
+//     border-radius: 50%;
+//     background-color: #d80000;
+//     margin: 0 5px;
+//     cursor: pointer;
+//     transition: all 0.3s ease;
+//     z-index: 999;
+// }
+
+// .dot.active {
+//     width: 14px;
+//     height: 14px;
+//     background-color: #333;
+// }
+
+
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.slider{
+    z-index: -999;
+}

@@ -1,0 +1,28 @@
+.avatar {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    img {
+        cursor: pointer;
+        object-fit: cover;
+        height: 100px;
+    }
+}
+
+.dateContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 30px;
+
+    .icon {
+        font-size: 20px;
+        color: black;
+        margin-right: 10px;
+    }
+
+    .date {
+        color: black;
+    }
+}
