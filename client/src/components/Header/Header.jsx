@@ -13,6 +13,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import useUser from "../../hooks/useUser";
 import { vars } from "../../constants/variables";
 import { Link } from "react-router-dom";
+import "../SearchBar/SearchBar.css"
 
 // import SideNavigation from "../sidenav";
 
@@ -39,8 +40,7 @@ export default function Header() {
           <SideNavigation />
         </div>
         <div className="navbar-div">
-          <Link to='/'>
-            
+          <Link to='/' className="navbar-link-home">
             <span className="navbar-span">Home</span>
           </Link>
           <span className="navbar-span">Contact</span>
