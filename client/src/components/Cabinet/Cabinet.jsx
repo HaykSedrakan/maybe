@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Cabinet.css";
 import Header from "../Header/Header";
+import { Link } from "react-router-dom";
 
 export default function Cabinet() {
   const [active, setActive] = useState(true);
@@ -27,22 +28,26 @@ export default function Cabinet() {
           </div>
           <div className="tabBody">
             <div className="tabBar">
-              <div
-                className={`activeBar ${
-                  activeButton === "active" ? "active" : ""
-                }`}
-                onClick={() => handleActiveTabToggle("active")}
-              >
-                Active
-              </div>
-              <div
-                className={`inActiveBar ${
-                  activeButton === "inactive" ? "active" : ""
-                }`}
-                onClick={() => handleActiveTabToggle("inactive")}
-              >
-                Inactive
-              </div>
+              <Link to={"/cabinet/active"}>
+                <div
+                  className={`activeBar ${
+                    activeButton === "active" ? "active" : ""
+                  }`}
+                  onClick={() => handleActiveTabToggle("active")}
+                >
+                  Active
+                </div>
+              </Link>
+              <Link to={"/cabinet/inactive"}>
+                <div
+                  className={`inActiveBar ${
+                    activeButton === "inactive" ? "active" : ""
+                  }`}
+                  onClick={() => handleActiveTabToggle("inactive")}
+                >
+                  Inactive
+                </div>
+              </Link>
             </div>
             <div className="ads">
               <div className="notFound">

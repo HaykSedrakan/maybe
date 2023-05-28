@@ -42,9 +42,9 @@ body {
   padding: 0;
 }
 
-img {
+/* img {
   width: 100%;
-}
+} */
 
 .cardd {
   position: relative;
@@ -408,5 +408,5 @@ img {
   color: crimson;
 }
 p{
-  margin: 0;
+  margin: 0 !important;
 }

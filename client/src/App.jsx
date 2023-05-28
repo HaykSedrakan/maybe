@@ -12,6 +12,8 @@ import AdminBanners from './components/AdminDashboard/AdminBanners/AdminBanners'
 import MyFavorites from './components/MyFavorites/MyFavorites'
 import Cabinet from "./components/Cabinet/Cabinet"
 import SignUp from './components/LoginPage/SignUp'
+import Active from './components/Cabinet/Active'
+import Inactive from './components/Cabinet/Inactive'
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
         <Route path="/my/favorites/products" element={<MyFavorites />} />
         <Route path="/product/search" element={<ProductsPage />} />
         <Route path="/cabinet" element={<Cabinet />}/>
+        <Route path="/cabinet/active" element={<Active />}/>
+        <Route path="/cabinet/inactive" element={<Inactive />}/>
         <Route path="/admin/admindashboard" element={<AdminDashboard />}>
           <Route
             path="/admin/admindashboard/categories"

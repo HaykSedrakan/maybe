@@ -34,7 +34,7 @@
   padding: 0;
 }
 
-.container {
+.cabinetContainer {
   background-color: var(--greyLight-1);
   width: 100%;
 }
