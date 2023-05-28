@@ -1,51 +1,105 @@
-import styles from './ProductsPage.module.scss'
-import Header from '../Header/Header'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
-import { useNavigate, useLocation } from 'react-router-dom'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'font-awesome/css/font-awesome.min.css'
+import "./ProductsPage.scss";
+import Header from "../Header/Header";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate, useLocation } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "font-awesome/css/font-awesome.min.css";
+
+import { MdFormatListBulleted } from "react-icons/md";
+import { ImTable2 } from "react-icons/im";
+import { MdLocationPin } from "react-icons/md";
+
 
 export default function ProductsPage() {
-  const navigate = useNavigate()
-  const [products, setProducts] = useState([])
-  const location = useLocation()
-  const searchParams = new URLSearchParams(location.search)
-  const searchValue = searchParams.get('search')
+  const navigate = useNavigate();
+  const [products, setProducts] = useState([]);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const searchValue = searchParams.get("search");
 
-  console.log(searchValue)
+  console.log(searchValue);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_API}/products`)
+        const res = await axios.get(`${process.env.REACT_APP_API}/products`);
         const filteredDatas =
           res.data &&
           res.data.filter((item) =>
             item?.label.toLowerCase().includes(searchValue.toLowerCase())
-          )
-        setProducts(filteredDatas)
+          );
+        setProducts(filteredDatas);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
-    fetchProducts()
-  }, [])
+    };
+    fetchProducts();
+  }, []);
 
   const handleNavigate = (id) => {
-    navigate(`/product/details/${id}`)
-  }
+    navigate(`/product/details/${id}`);
+  };
 
   return (
     <>
       <Header />
-      <div className={styles.container}>
+      <div className="container">
+        <div className="content">
+          <div className="filters">
+            <div className="show-type">
+              <div className="show-type__icons">
+                <div className="row-icon">
+                  <MdFormatListBulleted />
+                </div>
+                <div className="cell-icon">
+                  <ImTable2 />
+                </div>
+              </div>
+            </div>
+            <div className="sorts">
+              <div className="currency">Currency</div>
+              <div className="catagory">Catagory</div>
+            </div>
+          </div>
+          <div className="adverts-div">
+            <div className="adverts-title">Adverts</div>
+            <div className="adverts">
+              {products &&
+                products.map((item) => (
+                  <div
+                    className="advert"
+                    onClick={() => handleNavigate(item?.id)}
+                    key={item?.id}
+                  >
+                    <div className="img-div">
+                      <img alt="img" src={item?.image} className="advert-img" />
+                    </div>
+                    <div className="info-div">
+                      <div className="title-div">{item?.label}</div>
+                      <div className="price-div">
+                        {item?.currency === "USD" ? "$" : "֏"}
+                        {item?.price
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+                      </div>
+                      <div className="location-div">
+                        {<MdLocationPin className="location-icon" />}{" "}
+                        <span className="location-title">{item?.location}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* <div className={styles.container}>
         <div className={styles.filterSection}>
-          {/* Верхняя часть для фильтрации */}
-          {/* Здесь можно добавить компоненты для фильтрации продуктов */}
         </div>
         <div className={styles.productSection}>
-          <section style={{ backgroundColor: ' #eee' }}>
+          <section style={{ backgroundColor: " #eee" }}>
             <div className="container py-5">
               <div className="row justify-content-center mb-3">
                 <div className="col-md-12 col-xl-10">
@@ -62,6 +116,7 @@ export default function ProductsPage() {
                                       <div className="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
                                         <div className="bg-image hover-zoom ripple rounded ripple-surface">
                                           <img
+                                            alt='img'
                                             src={item?.image}
                                             className="w-100"
                                           />
@@ -71,8 +126,9 @@ export default function ProductsPage() {
                                                 className="mask"
                                                 style={{
                                                   backgroundColor:
-                                                    'rgba(253, 253, 253, 0.15)',
-                                                }}></div>
+                                                    "rgba(253, 253, 253, 0.15)",
+                                                }}
+                                              ></div>
                                             </div>
                                           </a>
                                         </div>
@@ -85,7 +141,12 @@ export default function ProductsPage() {
                                       </div>
                                       <div className="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
                                         <div className="d-flex flex-row align-items-center mb-1">
-                                          <h4 className="mb-1 me-1">$14.99</h4>
+                                          <h4 className="mb-1 me-1">
+                                            {item?.currency === "USD"
+                                              ? "$"
+                                              : "֏"}
+                                            {item?.price}
+                                          </h4>
                                         </div>
                                       </div>
                                     </div>
@@ -102,7 +163,7 @@ export default function ProductsPage() {
             </div>
           </section>
         </div>
-      </div>
+      </div> */}
       {/* <div className={styles.container}>
         <div className={styles.top}>
           <div className={styles.filterPanel}>
@@ -232,5 +293,5 @@ export default function ProductsPage() {
         </div>
       </div> */}
     </>
-  )
+  );
 }

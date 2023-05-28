@@ -1,3 +1,28 @@
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+:root {
+  --index: calc(1vh + 1vw);
+  --font: sans-serif;
+
+  --primary-light: #8abdff;
+  --primary: #6d5dfc;
+  --primary-dark: #5b0eeb;
+
+  --white: #ffffff;
+  --greyLight-1: #e4ebf5;
+  --greyLight-2: #c8d0e7;
+  --greyLight-3: #bec8e4;
+  --greyDark: #9baacf;
+
+  --shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2),
+    -0.2rem -0.2rem 0.5rem var(--white);
+  --inner-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7,
+    inset -0.2rem -0.2rem 0.5rem #fff;
+}
+
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -8,8 +33,8 @@
   top: 250px;
   display: block;
   margin: auto;
-  height: 400px;
-  width: 250px;
+  height: 330px;
+  width: 240px;
   background-color: white;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
@@ -19,44 +44,53 @@
 }
 
 .card img {
-  width: 250px;
-  height: 200px;
+  width: 100%;
   object-fit: cover;
   border-radius: 15px 15px 0px 0px;
 }
 
 .card h1 {
   font-size: 1.3rem;
+  color: black;
 }
 
 .price {
-  font-style: italic;
-  color: rgb(155, 154, 154);
-  margin: 10px 0px;
+  margin: 5px 0px;
+  color: #222;
+  font-weight: bold;
 }
 
-.card-content {
-  padding: 15px;
+.cardContent {
+  padding: 12px;
 }
+
 
 .card button {
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding: 15px;
-  background-color: indigo;
+  padding: 8px;
+  background-color: var(--primary);
   outline: 0;
   border: 0;
   border-radius: 0px 0px 15px 15px;
   color: white;
   font-weight: 600;
   font-size: 0.9rem;
-  background: #102770;
   cursor: pointer;
+  transition: 0.3s;
+}
+.card:hover button {
+  opacity: 0.7;
+  transition: 0.3s;
 }
 
 .card:hover {
   cursor: pointer;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
   transform: translateY(-7px);
+}
+
+p {
+  margin-bottom: 0;
 }

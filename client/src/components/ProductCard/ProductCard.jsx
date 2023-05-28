@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './ProductCard.module.css'
 import axios from 'axios'
-import 'bootstrap/dist/css/bootstrap.min.css'
+// import 'bootstrap/dist/css/bootstrap.min.css'
 import 'font-awesome/css/font-awesome.min.css'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -13,7 +13,7 @@ const ProductCard = () => {
     const fetchProducts = async () => {
       try {
         const res = await axios.get(`${process.env.REACT_APP_API}/products`)
-        res.data && setProducts(res.data.slice(0, 20))
+        res.data && setProducts(res.data.slice(0, 100))
       } catch (error) {
         console.log(error)
       }
@@ -33,14 +33,21 @@ const ProductCard = () => {
             <div
               onClick={() => handleNavigate(item?.id)}
               className={styles.card}
-              key={item.id}>
+              key={item.id}
+            >
               <img src={item?.image} alt={item?.label} />
               <div className={styles.cardContent}>
-                <p onClick={() => handleNavigate(item.id)}>{item?.label}</p>
-                <p className={styles.price}>
-                  {item?.currency} {item?.price}
+                <p
+                  onClick={() => handleNavigate(item.id)}
+                  className={styles.label}
+                >
+                  {item?.label.slice(0,24)}...
                 </p>
-                <p>{item?.description}</p>
+                <p className={styles.price}>
+                  {item?.currency === "USD" ? "$" : "֏"}{" "}
+                  {item?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+                </p>
+                <p className={styles.loc}>{item?.location}</p>
               </div>
 
               <button>Details</button>
@@ -48,7 +55,7 @@ const ProductCard = () => {
           ))}
       </div>
     </>
-  )
+  );
 }
 
 export default ProductCard

@@ -16,7 +16,7 @@ import { Box } from '@mui/material'
 import { Link } from 'react-router-dom'
 
 const StyledDrawerHeader = styled.div`
-  background-color: #86c232;
+  background-color: #6d5dfc;
   display: flex;
   align-items: center;
   padding: 2px;
@@ -53,7 +53,7 @@ const SideNavigation = () => {
           </StyledDrawerHeader>
           <List>
             <ListItem button>
-              <ListItemIcon style={{ color: '#6B6E70' }}>
+              <ListItemIcon style={{ color: '#6d5dfc' }}>
                 <CategoryIcon />
               </ListItemIcon>
               <ListItemText primary="Categories" style={{ color: 'white' }} />
@@ -84,13 +84,13 @@ const SideNavigation = () => {
             <Divider />
             <br />
             <ListItem button component={Link} to="/settings">
-              <ListItemIcon style={{ color: '#6B6E70' }}>
+              <ListItemIcon style={{ color: '#6d5dfc' }}>
                 <SettingsIcon />
               </ListItemIcon>
               <ListItemText primary="Settings" style={{ color: 'white' }} />
             </ListItem>
             <ListItem button component={Link} to="/about">
-              <ListItemIcon style={{ color: '#6B6E70' }}>
+              <ListItemIcon style={{ color: '#6d5dfc' }}>
                 <InfoIcon />
               </ListItemIcon>
               <ListItemText primary="About Us" style={{ color: 'white' }} />
@@ -102,7 +102,7 @@ const SideNavigation = () => {
         aria-label="open drawer"
         edge="start"
         onClick={handleDrawerOpen}
-        style={{ color: '#86C232' }}>
+        style={{ color: '#6d5dfc' }}>
         <MenuOpenIcon />
       </IconButton>
     </>

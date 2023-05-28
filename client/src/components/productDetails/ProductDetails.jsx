@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import "./ProductDetails.css";
 import Header from "../Header/Header";
 
 import { MdLocationPin } from "react-icons/md";
-import { FaUserCircle, FaCheck } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
+import { HiCheck } from "react-icons/hi";
+import { FaHeart,FaCheck } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 
+import styles from './ProductDetails.module.css'; // ...
 
 export default function ProductDetails() {
   const { pathname } = useLocation();
@@ -42,62 +43,67 @@ export default function ProductDetails() {
   return (
     <>
       <Header />
-      <div className="productPage">
-        <div className="card-wrapper">
-          <div className="card">
-            <div className="img-display">
-              <div className="img-showcase">
+      <div className={styles.productPage}>
+        <div className={styles.cardWrapper}>
+          <div className={styles.cardd}>
+            <div className={styles.imgDisplay}>
+              <div className={styles.imgShowcase}>
                 <img src={product?.image} alt="img" />
               </div>
             </div>
 
-            <div className="menu">
-              <div className="purchase-info">
-                <div className="fav" onClick={toggleClass}>
+            <div className={styles.menu}>
+              <div className={styles.purchaseInfo}>
+                <div className={styles.fav} onClick={toggleClass}>
                   <FaHeart
-                    className={!isActive ? "fav-icon" : "fav-icon_active"}
+                    className={
+                      !isActive ? styles.favIcon : styles.favIconActive
+                    }
                   />
                 </div>
-                <div className="user-info">
-                  <div className="user-img">
-                    <FaUserCircle className="user-icon" />
+                <div className={styles.userInfo}>
+                  <div className={styles.userImg}>
+                    <FaUserCircle className={styles.userIcon} />
                   </div>
-                  <div className="user-name">User Name</div>
-                  <div className="since">On 'title' since 'time'</div>
+                  <div className={styles.userName}>User Name</div>
+                  <div className={styles.since}>On 'title' since 'time'</div>
                 </div>
-                <div className="btns">
-                  <button type="button" class="btn btn-now">
+                <div className={styles.btns}>
+                  <button
+                    type="button"
+                    className={`${styles.btn} ${styles.btnNow}`}
+                  >
                     Contact
                   </button>
-                  <button className="btn btn-fav">Favourite</button>
+                  <button className={`${styles.btn} ${styles.btnFav}`}>
+                    Favourite
+                  </button>
                 </div>
               </div>
-              <div className="additions">
-                <div className="to-top addition">
-                  <FaCheck className="check-icon" />
+              <div className={styles.additions}>
+                <div className={`${styles.toTop} ${styles.addition}`}>
+                  <FaCheck className={styles.checkIcon} />
                   <p>Top</p>
                 </div>
-                <div className="to-home addition">
-                  <FaCheck className="check-icon" />
+                <div className={`${styles.toHome} ${styles.addition}`}>
+                  <FaCheck className={styles.checkIcon} />
                   <p>Home</p>
                 </div>
-                <div className="to-urgently addition">
-                  <FaCheck className="check-icon" />
+                <div className={`${styles.toUrgently} ${styles.addition}`}>
+                  <FaCheck className={styles.checkIcon} />
                   <p>Urgently</p>
                 </div>
               </div>
-              <div className="samilar-products-div">
+              <div className={styles.samilarProductsDiv}>
                 <p>Samilar Adverts</p>
-                <div className="samilar-products">
-                  <div className="samilar-product">
+                <div className={styles.samilarProducts}>
+                  <div className={styles.samilarProduct}>
                     <img src={product?.image} alt="img" />
-                    <div className="samilar-product-text">
-                      <div className="samilar-product-title">
-                        {" "}
+                    <div className={styles.samilarProductText}>
+                      <div className={styles.samilarProductTitle}>
                         {product?.label}
                       </div>
-                      <div className="samilar-product-price">
-                        {" "}
+                      <div className={styles.samilarProductPrice}>
                         {product?.currency === "USD" ? "$" : "֏"}
                         {product?.price}
                       </div>
@@ -107,26 +113,29 @@ export default function ProductDetails() {
               </div>
             </div>
 
-            <div className="product-content">
-              <h2 className="product-title">{product?.label}</h2>
-              <div className="product-location">
-                <span className="location">
-                  <MdLocationPin className="loc-icon" />{" "}
-                </span>
-                <span className="loc-name">{product?.location}</span>
-              </div>
-              <div className="product-price">
-                <p className="price">
+            <div className={styles.productContent}>
+              <h2 className={styles.productTitle}>{product?.label}</h2>
+              <div className={styles.productPrice}>
+                <p className={styles.price}>
                   <span>
                     Price: {product?.currency === "USD" ? "$" : "֏"}
-                    {product?.price}
+                    {product?.price?.toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
                   </span>
                 </p>
               </div>
+              <div className={styles.productLocation}>
+                <span className={styles.location}>
+                  <MdLocationPin className={styles.locIcon} />{" "}
+                </span>
+                <span className={styles.locName}>{product?.location}</span>
+              </div>
 
-              <div className="product-detail">
+              <div className={styles.productDetail}>
                 <h2>about item: </h2>
-                <p className="product-description">{product?.description}</p>
+                <p className={styles.productDescription}>
+                  {product?.description}
+                </p>
               </div>
             </div>
           </div>

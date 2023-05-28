@@ -148,12 +148,6 @@
   height: calc(var(--index) * 2);
 }
 
-.user-icon {
-  width: 100%;
-  height: 100%;
-  color: var(--own-darkGreen);
-  cursor: pointer;
-}
 
 .cart-div {
   color: var(--own-lightGreen);
@@ -221,3 +215,4 @@
 .siteLogo {
   height: 100px;
 }
+

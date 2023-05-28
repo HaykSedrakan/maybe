@@ -99,3 +99,10 @@
   font-size: 20px;
   margin-right: 5px;
 }
+
+.search-icon{
+  color: #6d5dfc;
+}
+#clearBtn{
+  color: #6d5dfc;
+}
