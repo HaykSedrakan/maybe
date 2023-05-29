@@ -13,7 +13,7 @@ const app = express()
 
 app.use(express.json())
 app.use(cors({
-    origin: ["http://localhost:3000", "https://7ae6-2a00-cc47-232c-1101-00-b70a.ngrok-free.app"],
+    origin: ["http://localhost:3000", "https://778d-2a00-cc47-232c-1101-00-f6f1.ngrok-free.app"],
     methods: ["PUT", "POST", "GET", "DELETE"],
     credentials: true
 }));
@@ -300,6 +300,83 @@ app.post('/addFavourite/user/:id', (req, res) => {
     });
 });
 
+
+app.put('/editProduct/:id', (req, res) => {
+    const productId = req.params.id
+
+    const values = []
+
+    if (req.body.title) {
+        values.push(`title = '${req.body.title}'`);
+    }
+
+    if (req.body.description) {
+        values.push(`description = '${req.body.description}'`);
+    }
+
+    if (req.body.img) {
+        values.push(`img = '${req.body.img}'`);
+    }
+    if (req.body.price) {
+        values.push(`price = '${req.body.price}'`);
+    }
+
+    if (req.body.currency) {
+        values.push(`currency = '${req.body.currency}'`);
+    }
+    if (req.body.location) {
+        values.push(`location = '${req.body.location}'`);
+    }
+    if (req.body.type) {
+        values.push(`type = '${req.body.type}'`);
+    }
+    if (req.body.category) {
+        values.push(`category = '${req.body.category}'`);
+    }
+
+
+    const q = `UPDATE products SET ${values.join(', ')} WHERE id = ${productId}`;
+
+    db.query(q, (err, data) => {
+        return err ? res.send(err) : res.send('Product has been edit success !')
+    })
+})
+
+app.post('/addProduct', (req, res) => {
+    const q = 'INSERT INTO products (`title`,`description`,`price`,`currency`,`img`,`location`,`type`,`userId`,`category`) VALUES (?)'
+
+    const values = [
+        req.body.title,
+        req.body.description,
+        req.body.price,
+        req.body.currency,
+        req.body.img,
+        req.body.location,
+        req.body.type,
+        req.body.userId,
+        req.body.category,
+    ]
+    db.query(q, [values], (err, data) => {
+        return err ? res.send(err) : res.send('Product has been created success')
+    })
+})
+
+app.get('/productsNew', (req, res) => {
+    const q = 'SELECT * FROM products'
+
+    db.query(q, (err, data) => {
+        return err ? res.send(err) : res.send(data)
+    })
+})
+
+app.delete('/deleteproduct/:id', (req, res) => {
+    const q = 'DELETE FROM products WHERE id = ?'
+    const productId = req.params.id
+
+    db.query(q, [productId], (err, data) => {
+        return err ? res.send(err) : res.send('Product has been delete success')
+    })
+})
 
 
 

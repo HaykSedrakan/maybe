@@ -1,0 +1,166 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --index: calc(1vh + 1vw);
+  --font: sans-serif;
+
+  --primary-light: #8abdff;
+  --primary: #6d5dfc;
+  --primary-dark: #5b0eeb;
+
+  --white: #ffffff;
+  --greyLight-1: #e4ebf5;
+  --greyLight-2: #c8d0e7;
+  --greyLight-3: #bec8e4;
+  --greyDark: #9baacf;
+
+  --shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2),
+    -0.2rem -0.2rem 0.5rem var(--white);
+  --inner-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7,
+    inset -0.2rem -0.2rem 0.5rem #fff;
+}
+
+.cabinetAds {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.cabinetAd {
+  display: flex;
+  padding: 16px;
+}
+
+.cabinetImgDiv {
+  width: 190px;
+  margin-right: 20px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.cabinetImg {
+  height: 142px;
+  width: 190px;
+  margin-right: 20px;
+  border-radius: 8px;
+  object-fit: cover;
+  background-size: cover;
+}
+
+.cabinetInfoDiv {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin-top: -2px;
+  margin-left: 12px;
+}
+
+.cabinetTitle {
+  font-size: 16px;
+  color: #222;
+  margin: -2px 150px 4px 0;
+}
+
+.cabinetLocation {
+  font-size: 14px;
+  color: #999;
+  margin-top: 4px;
+}
+
+.s {
+  display: flex;
+  flex-direction: row;
+  margin-top: 12px;
+  font-size: 14px;
+  color: #666;
+  cursor: default;
+  white-space: nowrap;
+}
+
+.s div {
+  margin-right: 26px;
+}
+
+.cabinetWatched,
+.cabinetDays {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.cabinetIcons {
+  width: 886px;
+  /* height: 43px; */
+  display: flex;
+  margin-top: 15px;
+}
+
+.cabinetIcons div {
+  /* margin-right: 16px; */
+  text-align: center;
+  font-size: 12px;
+  /* margin-top: 2px; */
+  transition-duration: 0.2s;
+  transition-property: color;
+  color: #222;
+}
+
+.toTopIcon {
+  font-size: 33px;
+  color: var(--primary);
+}
+
+.addTop {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+.addHome {
+  cursor: pointer;
+  padding-top: 4px;
+  gap: 5px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-right: 12px;
+}
+
+.toHomeIcon {
+  color: var(--primary);
+  font-size: 24px;
+}
+
+.cabinetAdIcons {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  display: flex;
+}
+
+.cabinetEdit,
+.cabinetDelete {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.cabinetEdit {
+  color: var(--primary);
+}
+
+.cabinetDelete {
+  color: rgb(255, 50, 91);
+}
+
+
+.i {
+  width: 25px;
+  height: 25px;
+}

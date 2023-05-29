@@ -10,22 +10,32 @@ import AdminDashboard from './components/AdminDashboard/AdminDashboard'
 import AdminCategories from './components/AdminDashboard/AdminCategories/AdminCategories'
 import AdminBanners from './components/AdminDashboard/AdminBanners/AdminBanners'
 import MyFavorites from './components/MyFavorites/MyFavorites'
+import Cabinet from './components/Cabinet/Cabinet'
+import SignUp from './components/LoginPage/SignUp'
+import Active from './components/Cabinet/Active'
+import Inactive from './components/Cabinet/Inactive'
 import AddProductPage from './components/AddProductPage/AddProductPage'
+import EditProductPage from './components/EditProductPage/EditProductPage'
 
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<NavBarLayout />} />
-        <Route path="/login/auth" element={<LoginPage />} />{' '}
+        <Route path="/login" element={<LoginPage />} />{' '}
+        <Route path="/signup" element={<SignUp />} />{' '}
         <Route path="/product/details/:id" element={<ProductDetails />} />
         <Route path="/user/:id/account/settings" element={<Settings />} />
+        <Route path="/edit/product/:id" element={<EditProductPage />} />
         <Route path="/my/favorites/products" element={<MyFavorites />} />
         <Route
           path="/my/cabinet/add/new/product"
           element={<AddProductPage />}
         />
         <Route path="/product/search" element={<ProductsPage />} />
+        <Route path="/cabinet" element={<Cabinet />} />
+        <Route path="/cabinet/active" element={<Active />} />
+        <Route path="/cabinet/inactive" element={<Inactive />} />
         <Route path="/admin/admindashboard" element={<AdminDashboard />}>
           <Route
             path="/admin/admindashboard/categories"

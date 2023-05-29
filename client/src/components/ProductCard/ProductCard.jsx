@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './ProductCard.module.css'
 import axios from 'axios'
-import 'bootstrap/dist/css/bootstrap.min.css'
+// import 'bootstrap/dist/css/bootstrap.min.css'
 import 'font-awesome/css/font-awesome.min.css'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -12,8 +12,23 @@ const ProductCard = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_API}/products`)
-        res.data && setProducts(res.data.slice(0, 20))
+        const res = await axios.get(`${process.env.REACT_APP_API}/productsNew`)
+        const parsedDatas =
+          res.data &&
+          res.data.map((item) => {
+            return {
+              price: item.price,
+              description: item.description,
+              currency: item.currency,
+              location: item.location,
+              img: JSON.parse(item.img),
+              userId: item.userId,
+              id: item.id,
+              title: item.title,
+              type: item.type,
+            }
+          })
+        parsedDatas && setProducts(parsedDatas.slice(0, 15))
       } catch (error) {
         console.log(error)
       }
@@ -34,16 +49,19 @@ const ProductCard = () => {
               onClick={() => handleNavigate(item?.id)}
               className={styles.card}
               key={item.id}>
-              <img src={item?.image} alt={item?.label} />
+              <img
+                className={styles.img}
+                src={item?.img[0]?.jpeg}
+                alt={item?.label}
+              />
               <div className={styles.cardContent}>
-                <p onClick={() => handleNavigate(item.id)}>{item?.label}</p>
-                <p className={styles.price}>
-                  {item?.currency} {item?.price}
-                </p>
-                <p>{item?.description}</p>
+                <div className={styles.price}>
+                  {' '}
+                  {item?.currency === 'USD' ? '$' : '֏'}{' '}
+                  {item?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
+                </div>
+                <div className={styles.title}>{item?.title}</div>
               </div>
-
-              <button>Details</button>
             </div>
           ))}
       </div>

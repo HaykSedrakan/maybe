@@ -16,7 +16,7 @@ function SearchBar() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_API}/products`)
+        const res = await axios.get(`${process.env.REACT_APP_API}/productsNew`)
         res.data && setProducts(res.data)
       } catch (error) {
         console.log(error)
@@ -32,7 +32,7 @@ function SearchBar() {
     const newFilter =
       products &&
       products.filter((value) => {
-        return value.label.toLowerCase().includes(searchWord.toLowerCase())
+        return value.title.toLowerCase().includes(searchWord.toLowerCase())
       })
 
     if (searchWord === '') {
@@ -66,7 +66,7 @@ function SearchBar() {
         />
         <div className="searchIcon">
           {filteredData.length === 0 ? (
-            <SearchIcon />
+            <SearchIcon className="search-icon" />
           ) : (
             <CloseIcon id="clearBtn" onClick={clearInput} />
           )}
@@ -77,7 +77,7 @@ function SearchBar() {
           {filteredData.slice(0, 15).map((value, key) => {
             return (
               <Link className="dataItem" to={`/product/details/${value.id}`}>
-                <p>{value.label}</p>
+                <p>{value.title}</p>
               </Link>
             )
           })}

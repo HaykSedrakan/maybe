@@ -10,7 +10,7 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App'
 import { Provider } from 'react-redux'
-import store from './redux/store'
+import store from './redux/index'
 import NotFound from './components/ErrorPage/ErrorPage'
 import NavBarLayout from './Layouts/outlet'
 import Footer from './components/Footer/Footer'
@@ -20,6 +20,6 @@ root.render(
   <BrowserRouter>
     <Provider store={store}>
       <App />
-    </Provider>
+    </Provider>{' '}
   </BrowserRouter>
 )

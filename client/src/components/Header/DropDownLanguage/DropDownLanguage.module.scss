@@ -1,0 +1,97 @@
+:root {
+    --index: calc(1vh + 1vw);
+    --font: sans-serif;
+
+    --primary-light: #8abdff;
+    --primary: #6d5dfc;
+    --primary-dark: #5b0eeb;
+
+    --white: #ffffff;
+    --greyLight-1: #e4ebf5;
+    --greyLight-2: #c8d0e7;
+    --greyLight-3: #bec8e4;
+    --greyDark: #9baacf;
+
+    --shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2),
+        -0.2rem -0.2rem 0.5rem var(--white);
+    --inner-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7,
+        inset -0.2rem -0.2rem 0.5rem #fff;
+}
+
+.dropdownContainer {
+    position: relative;
+    max-width: 80px;
+}
+
+.selectedLanguage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+    width: 70px;
+    color: var(--primary)
+}
+
+.selectedLanguage svg {
+    margin-left: 10px;
+}
+
+.dropdownMenu {
+    margin-top: 10px;
+    position: absolute;
+    top: calc(100% - 5px);
+    left: 0;
+    min-width: 40px;
+    padding: 10px;
+    background-color: var(--primary-dark);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dropdownItem {
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.dropdownItem:hover {
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    color: var(--primary-dark);
+}
+
+.dropdownEnter {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.dropdownEnterActive {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 200ms ease-in-out;
+}
+
+.dropdownExit {
+    opacity: 1;
+}
+
+.dropdownExitActive {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 200ms ease-in-out;
+}
+
+.dropdownContainer .icon {
+    font-size: 20px;
+}
+
+.active {
+    color: var(--primary-light);
+}

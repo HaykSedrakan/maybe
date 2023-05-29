@@ -1,4 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit'
+import {
+    createSlice
+} from '@reduxjs/toolkit'
 
 const navBarSlice = createSlice({
     name: 'navBar',
@@ -6,9 +8,13 @@ const navBarSlice = createSlice({
         user: 'false'
     },
     reducers: {
-        login: state => {state.user = true},
+        login: state => {
+            state.user = true
+        },
     }
 })
 
-export const { navBar } = navBarSlice.actions
+export const {
+    navBar
+} = navBarSlice.actions
 export default navBarSlice.reducer;

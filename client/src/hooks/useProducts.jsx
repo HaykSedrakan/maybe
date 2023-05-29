@@ -10,7 +10,9 @@ const useProducts = (limit) => {
       isInitialMount.current = false
       const fetchProducts = async () => {
         try {
-          const res = await axios.get(`${process.env.REACT_APP_API}/products`);
+          const res = await axios.get(
+            `${process.env.REACT_APP_API}/productsNew`
+          )
           const limitedProducts = res.data.slice(0, limit)
           setProducts(limitedProducts)
         } catch (error) {
