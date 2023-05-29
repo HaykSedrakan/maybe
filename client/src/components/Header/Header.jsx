@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import "./Header.css";
-import SideNavigation from "../SideNav/sidenav";
-import { RiShoppingCartLine } from "react-icons/ri";
-import { MdLanguage } from "react-icons/md";
-import ProductCard from "../ProductCard/ProductCard";
-import styles from "./Menu.module.css";
-import { FaUserAlt } from "react-icons/fa";
-import { FiSettings } from "react-icons/fi";
-import { TbLogout } from "react-icons/tb";
-import axios from "axios";
-import SearchBar from "../SearchBar/SearchBar";
-import useUser from "../../hooks/useUser";
-import { Link } from "react-router-dom";
-import "../SearchBar/SearchBar.css";
+import React, { useState } from 'react'
+import './Header.css'
+import SideNavigation from '../SideNav/sidenav'
+import { RiShoppingCartLine } from 'react-icons/ri'
+import { MdLanguage } from 'react-icons/md'
+import ProductCard from '../ProductCard/ProductCard'
+import styles from './Menu.module.css'
+import { FaUserAlt } from 'react-icons/fa'
+import { FiSettings } from 'react-icons/fi'
+import { TbLogout } from 'react-icons/tb'
+import axios from 'axios'
+import SearchBar from '../SearchBar/SearchBar'
+import useUser from '../../hooks/useUser'
+import { Link } from 'react-router-dom'
+import '../SearchBar/SearchBar.css'
 import { useNavigate } from 'react-router-dom'
 import Banner from '../Baner/Baner'
 // import SideNavigation from "../sidenav";
@@ -67,7 +67,7 @@ export default function Header() {
           <div className="cart-div">
             {<RiShoppingCartLine className="scart-icon" />}
           </div>
-          <div className="user-div">
+          <div className={styles.userDiv}>
             <div className={styles.action} onClick={handleClickMenu}>
               <div className={styles.profile}>
                 <img
@@ -115,7 +115,6 @@ export default function Header() {
           </div>
         </div>
       </header>
-      <Banner />
     </>
   )
 }

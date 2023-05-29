@@ -13,7 +13,7 @@ const app = express()
 
 app.use(express.json())
 app.use(cors({
-    origin: ["http://localhost:3000", "https://9c3d-2a00-cc47-232c-1101-00-11aa.ngrok-free.app"],
+    origin: ["http://localhost:3000", "https://7ae6-2a00-cc47-232c-1101-00-b70a.ngrok-free.app"],
     methods: ["PUT", "POST", "GET", "DELETE"],
     credentials: true
 }));

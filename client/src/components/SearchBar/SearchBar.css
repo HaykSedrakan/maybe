@@ -8,6 +8,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  z-index: 9999;
   /* position: relative; */
 }
 
@@ -29,6 +30,7 @@
   background: #e4ebf5;
   transition: 0.3 ease;
 }
+
 .searchInputs input:focus {
   box-shadow: var(--shadow);
   transition: 0.3s;

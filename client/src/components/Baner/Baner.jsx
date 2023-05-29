@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useEffect } from 'react'
-import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
 import styles from './Baner.module.scss'
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.scss'
+import 'slick-carousel/slick/slick-theme.scss'
+import { GrPrevious, GrNext } from 'react-icons/gr'
+import './SliderDots.scss'
 
 const Banner = () => {
-  const [baners, setBanners] = useState([])
-  const [currentSlide, setCurrentSlide] = useState(0) // Добавлено: хранение текущего слайда
+  const [banners, setBanners] = useState([])
 
   useEffect(() => {
     const fetchBanners = async () => {
@@ -17,54 +17,74 @@ const Banner = () => {
           withCredentials: true,
           sameSite: 'none',
         })
-        const datasParser =
+        const dataParser =
           res.data &&
           res.data.map((item) => {
             return {
               id: item.id,
               img: JSON.parse(item.img),
-              label: 'Baner',
+              label: 'Banner',
             }
           })
 
-        setBanners(datasParser)
+        setBanners(dataParser)
       } catch (error) {
         console.log(error)
       }
     }
+
     fetchBanners()
   }, [])
 
-  console.log(baners)
+  const CustomPrevArrow = (props) => {
+    const { className, style, onClick } = props
+    return (
+      <button
+        className={`${className} ${styles.customPrevArrow}`}
+        style={style}
+        onClick={onClick}>
+        <GrPrevious />
+      </button>
+    )
+  }
+
+  const CustomNextArrow = (props) => {
+    const { className, style, onClick } = props
+    return (
+      <button
+        className={`${className} ${styles.customNextArrow}`}
+        style={style}
+        onClick={onClick}>
+        <GrNext />
+      </button>
+    )
+  }
 
   const settings = {
-    className: '',
     dots: true,
     infinite: true,
+    speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    adaptiveHeight: true,
+    autoplay: true,
+    autoplaySpeed: 5000,
     arrows: true,
-    beforeChange: (oldIndex, newIndex) => setCurrentSlide(newIndex), // Добавлено: обновление текущего слайда
-    customPaging: (i) => (
-      <div
-        className={styles.dot}
-        style={{
-          backgroundColor: i === currentSlide ? '#777' : 'red',
-        }}></div>
-    ),
+    prevArrow: <CustomPrevArrow />,
+    nextArrow: <CustomNextArrow />,
   }
 
   return (
-    <Slider {...settings} className={styles.slider}>
-      {baners.map((baner, index) => (
-        <div key={index}>
-          {' '}
-          {/* Добавлено: ключ для элементов слайдера */}
-          <img src={baner?.img?.jpeg} alt={`Slide ${index + 1}`} />
-        </div>
-      ))}
-    </Slider>
+    <div className={styles.carousel}>
+      <Slider {...settings}>
+        {banners.map((item) => (
+          <div key={item.id}>
+            <div className={styles.slide}>
+              <img src={item?.img?.jpeg} alt="Banner" />
+            </div>
+          </div>
+        ))}
+      </Slider>
+    </div>
   )
 }
 

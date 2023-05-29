@@ -1,0 +1,22 @@
+@import "rsuite/dist/rsuite.css";
+
+
+.rsuite-radio-checker {
+    border-color: #e71c1c;
+    /* Желаемый цвет рамки */
+}
+
+.rsuite-radio-checker .rsuite-radio-inner {
+    background-color: #e71c1c;
+    /* Желаемый цвет заполнения */
+}
+
+.rsuite-radio-checker.rsuite-radio-disabled .rsuite-radio-inner {
+    background-color: #e71c1c;
+    /* Желаемый цвет заполнения для неактивной радиокнопки */
+}
+
+.rsuite-radio-checker.rsuite-radio-checked .rsuite-radio-inner:after {
+    background-color: #e71c1c;
+    /* Желаемый цвет точки внутри радиокнопки при выборе */
+}

@@ -10,6 +10,7 @@ import AdminDashboard from './components/AdminDashboard/AdminDashboard'
 import AdminCategories from './components/AdminDashboard/AdminCategories/AdminCategories'
 import AdminBanners from './components/AdminDashboard/AdminBanners/AdminBanners'
 import MyFavorites from './components/MyFavorites/MyFavorites'
+import AddProductPage from './components/AddProductPage/AddProductPage'
 
 function App() {
   return (
@@ -20,6 +21,10 @@ function App() {
         <Route path="/product/details/:id" element={<ProductDetails />} />
         <Route path="/user/:id/account/settings" element={<Settings />} />
         <Route path="/my/favorites/products" element={<MyFavorites />} />
+        <Route
+          path="/my/cabinet/add/new/product"
+          element={<AddProductPage />}
+        />
         <Route path="/product/search" element={<ProductsPage />} />
         <Route path="/admin/admindashboard" element={<AdminDashboard />}>
           <Route
