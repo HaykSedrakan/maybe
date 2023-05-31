@@ -112,6 +112,13 @@ export default function ProductDetails() {
     fetchSimilarItems()
   }, [product?.category, productId])
   console.log(user)
+
+
+const handlePhoneCall = (phoneNumber) => {
+  const telLink = document.createElement("a");
+  telLink.href = `tel:+${phoneNumber}`;
+  telLink.click();
+};
   return (
     <>
       <Header />
@@ -151,13 +158,15 @@ export default function ProductDetails() {
                 </div>
                 <div className={styles.btns}>
                   <button
-                    type="button"
-                    className={`${styles.btn} ${styles.btnNow}`}>
+                    className={`${styles.btn} ${styles.btnNow}`}
+                    onClick={() => handlePhoneCall(user?.phoneNumber)}
+                    key={user?.id}
+                  >
                     Contact
                   </button>
-                  <button className={`${styles.btn} ${styles.btnFav}`}>
+                  {/* <button className={`${styles.btn} ${styles.btnFav}`}>
                     Favourite
-                  </button>
+                  </button> */}
                 </div>
               </div>
               <div className={styles.additions}>
@@ -175,18 +184,22 @@ export default function ProductDetails() {
                 </div>
               </div>
               <div className={styles.samilarProductsDiv}>
-                <p>Samilar Adverts</p>
+                <p>Similar Adverts</p>
                 <div className={styles.samilarProducts}>
                   {similarItems !== [] &&
                     similarItems.map((item) => (
                       <div className={styles.samilarProduct}>
-                        <img src={item?.img[0]?.jpeg} alt="img" />
+                        <img
+                          className={styles.similarImg}
+                          src={item?.img[0]?.jpeg}
+                          alt="img"
+                        />
                         <div className={styles.samilarProductText}>
                           <div className={styles.samilarProductTitle}>
                             {item?.title}
                           </div>
                           <div className={styles.samilarProductPrice}>
-                            {item?.currency}
+                            {item?.currency === "$ (USD)" ? "$" : "֏"}
                             {item?.price}
                           </div>
                         </div>
@@ -201,22 +214,22 @@ export default function ProductDetails() {
               <div className={styles.productPrice}>
                 <p className={styles.price}>
                   <span>
-                    Price: {product?.currency}
+                    {product?.currency === "$ (USD)" ? "$" : "֏"}
                     {product?.price
                       ?.toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
                   </span>
                 </p>
               </div>
               <div className={styles.productLocation}>
                 <span className={styles.location}>
-                  <MdLocationPin className={styles.locIcon} />{' '}
+                  <MdLocationPin className={styles.locIcon} />{" "}
                 </span>
                 <span className={styles.locName}>{product?.location}</span>
               </div>
 
-              <div className={styles.productDetail}>
-                <h2>about item: </h2>
+              <div className={styles.productDetailLabel}>
+                <h4>about item: </h4>
                 <p className={styles.productDescription}>
                   {product?.description}
                 </p>
@@ -226,5 +239,5 @@ export default function ProductDetails() {
         </div>
       </div>
     </>
-  )
+  );
 }

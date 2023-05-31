@@ -153,18 +153,20 @@ body {
   color: #256eff;
 }
 
-.productDetail h2 {
+.productDetailLabel h4 {
   text-transform: capitalize;
-  color: #12263a;
   margin-top: 20px;
   padding-bottom: 0.3rem;
+  font-size: 22px;
 }
 
-.productDetail p {
-  font-size: 1.2rem;
+.productDetailLabel p {
+  font-size: 15px;
   padding: 0.3rem;
   color: black;
-  max-width: 640px;
+  max-width: 610px;
+  inline-size: 610px;
+  overflow-wrap: break-word;
 }
 
 .detailsIcons {
@@ -173,7 +175,7 @@ body {
   color: var(--primary-dark);
 }
 
-.productDetail ul li span {
+.productDetailLabel ul li span {
   font-weight: 400;
 }
 
@@ -190,7 +192,7 @@ body {
 }
 
 .btns {
-  margin-top: 30px;
+  margin-top: 70px;
   width: 180px;
   flex-direction: column;
   display: block;
@@ -229,9 +231,9 @@ body {
   background-color: var(--primary-dark);
 }
 
-
 .productContent {
-  box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+  box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
+    rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
   max-width: 640px;
   padding: 20px;
 }
@@ -281,6 +283,7 @@ body {
 }
 
 .since {
+  margin-top: 8px;
   font-size: 13px;
   color: #888;
 }
@@ -379,7 +382,11 @@ body {
 
 .samilarProduct img {
   width: 140px;
+  max-width: 140px;
+  min-width: 140px;
   height: 105px;
+  min-height: 105px;
+  max-height: 105px;
   border-radius: 8px;
   object-fit: cover;
   margin-right: 10px;
@@ -412,7 +419,8 @@ body {
   min-height: 360px;
   height: auto;
   border-radius: 8px;
-  box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+  box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
+    rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
   /* margin-left: 20px; */
 }
 
@@ -441,6 +449,13 @@ p {
 }
 
 .avatar {
+  min-width: 80px;
+  max-width: 80px;
+  width: 80px;
+  min-height: 80px;
+  max-height: 80px;
   height: 80px;
-  border-radius: 50px;
+  border-radius: 50%;
+  background-position: cover;
+  object-fit: cover;
 }

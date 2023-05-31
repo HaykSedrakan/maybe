@@ -130,7 +130,7 @@ export default function AdminBanners() {
 
   async function handleDeleteBaner(id) {
     try {
-      await axios.delete(`${process.env.REACT_APP_API}/deletebaner/${id}`)
+      await axios.delete(`${process.env.REACT_APP_API}/deletebaner/${id}`).then(window.location.reload)
     } catch (error) {
       toast.error(error.message)
     }
@@ -153,7 +153,7 @@ export default function AdminBanners() {
             <div className={styles.box}>
               <div className={styles.mainTitle}>
                 <div className={styles.mainGreeting}>
-                  <h1>Main Baner</h1>
+                  <h1>Main Banner</h1>
                 </div>
               </div>
               <div className={styles.mainAdd}>

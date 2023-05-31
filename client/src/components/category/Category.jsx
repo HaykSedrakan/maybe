@@ -1,59 +1,42 @@
-import './ProductsPage.scss'
-import Header from '../Header/Header'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
-import { useNavigate, useLocation } from 'react-router-dom'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'font-awesome/css/font-awesome.min.css'
+import React from "react";
+import Header from "../Header/Header";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "font-awesome/css/font-awesome.min.css";
 
-import { MdFormatListBulleted } from 'react-icons/md'
-import { ImTable2 } from 'react-icons/im'
-import { MdLocationPin } from 'react-icons/md'
+import { MdFormatListBulleted } from "react-icons/md";
+import { ImTable2 } from "react-icons/im";
+import { MdLocationPin } from "react-icons/md";
 
-export default function ProductsPage() {
-  const navigate = useNavigate()
-  const [products, setProducts] = useState([])
-  const location = useLocation()
-  const searchParams = new URLSearchParams(location.search)
-  const searchValue = searchParams.get('search')
-
-  console.log(searchValue)
+export const Category = () => {
+  const navigate = useNavigate();
+  const [products, setProducts] = useState([]);
+  const { id } = useParams();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_API}/productsNew`)
-        const filteredDatas =
-          res.data &&
-          res.data
-            .filter((item) =>
-              item?.title.toLowerCase().includes(searchValue.toLowerCase())
-            )
-            .map((item) => {
-              return {
-                price: item.price,
-                description: item.description,
-                currency: item.currency,
-                location: item.location,
-                img: JSON.parse(item.img),
-                userId: item.userId,
-                id: item.id,
-                title: item.title,
-                type: item.type,
-              }
-            })
-        setProducts(filteredDatas)
+        const res = await axios.get(
+          `${process.env.REACT_APP_API}/categories`
+          );
+          console.log(res.data)
+        // const filteredDatas =
+        //   res.data &&
+        //   res.data.map((item) => {
+        //     return {};
+        //   });
+        // setProducts(filteredDatas);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
-    fetchProducts()
-  }, [])
-
+    };
+    fetchProducts();
+  }, [id]);
   const handleNavigate = (id) => {
-    navigate(`/product/details/${id}`)
-  }
-
+    navigate(`/product/details/${id}`);
+  };
   return (
     <>
       <Header />
@@ -95,7 +78,7 @@ export default function ProductsPage() {
                     <div className="info-div">
                       <div className="title-div">{item?.title}</div>
                       <div className="price-div">
-                        {item?.currency === "$ (USD)" ? "$" : "֏"}
+                        {item?.currency === "USD" ? "$" : "֏"}
                         {item?.price
                           .toString()
                           .replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
@@ -113,4 +96,4 @@ export default function ProductsPage() {
       </div>
     </>
   );
-}
+};

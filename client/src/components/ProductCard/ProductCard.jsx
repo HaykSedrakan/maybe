@@ -48,7 +48,8 @@ const ProductCard = () => {
             <div
               onClick={() => handleNavigate(item?.id)}
               className={styles.card}
-              key={item.id}>
+              key={item.id}
+            >
               <img
                 className={styles.img}
                 src={item?.img[0]?.jpeg}
@@ -56,9 +57,9 @@ const ProductCard = () => {
               />
               <div className={styles.cardContent}>
                 <div className={styles.price}>
-                  {' '}
-                  {item?.currency === 'USD' ? '$' : '֏'}{' '}
-                  {item?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
+                  {" "}
+                  {item?.currency === "$ (USD)" ? "$" : "֏"}{" "}
+                  {item?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
                 </div>
                 <div className={styles.title}>{item?.title}</div>
               </div>
@@ -66,7 +67,7 @@ const ProductCard = () => {
           ))}
       </div>
     </>
-  )
+  );
 }
 
 export default ProductCard

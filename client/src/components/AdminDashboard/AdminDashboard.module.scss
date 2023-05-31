@@ -1,3 +1,23 @@
+:root {
+  --index: calc(1vh + 1vw);
+  --font: sans-serif;
+
+  --primary-light: #8abdff;
+  --primary: #6d5dfc;
+  --primary-dark: #5b0eeb;
+
+  --white: #ffffff;
+  --greyLight-1: #e4ebf5;
+  --greyLight-2: #c8d0e7;
+  --greyLight-3: #bec8e4;
+  --greyDark: #9baacf;
+
+  --shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2),
+    -0.2rem -0.2rem 0.5rem var(--white);
+  --inner-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7,
+    inset -0.2rem -0.2rem 0.5rem #fff;
+}
+
 .textPrimaryP {
     color: hsl(203, 5%, 66%);
     font-size: 14px;
@@ -47,7 +67,6 @@
     align-items: center;
     justify-content: center;
     padding: 0 30px 0 30px;
-    box-shadow: 0 4px 6px 0 rgb(13, 223, 160);
 }
 
 
@@ -100,7 +119,7 @@
 
 
 .sidebar {
-    background: #020509;
+    background-color: var(--greyLight-1);
     grid-area: sidebar;
     overflow-y: auto;
     /* padding: 20px; */
@@ -112,36 +131,20 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    color: rgb(54, 54, 54);
+    color: var(--primary);
     margin-bottom: 30px;
     background-color: #fff;
-    box-shadow: 0 4px 6px 0 rgb(13, 223, 160);
     height: 60px;
 }
 
-.sidebarImg {
-    display: flex;
-    align-items: center;
-}
-
-.sidebarTitle>div>img {
-    width: 55px;
-    object-fit: contain;
-}
-
-.sidebarTitle>div>h1 {
-    font-size: 18px;
+.sidebarTitle>h1 {
+    font-size: 30px;
     display: inline;
 }
 
-.sidebarTitle>.icon {
-    font-size: 18px;
-    display: none;
-}
-
 .sidebarMenu>h2 {
-    color: #3ea175;
-    font-size: 16px;
+    color: var(--primary-dark);
+    font-size: 16px;  
     margin-top: 15px;
     margin-bottom: 5px;
     padding: 0 10px;
@@ -150,7 +153,7 @@
 
 .sidebarLink {
     display: flex;
-    color: #f3f4f6;
+    color: var(--primary-dark);
     padding: 10px;
     border-radius: 3px;
     margin-bottom: 5px;
@@ -158,18 +161,24 @@
 }
 
 .activeMenuLink {
-    background: rgba(62, 161, 117, 0.3);
-    color: #3ea175;
+    background: var(--primary-light);
+    color: var(--primary-dark);
 }
 
 .activeMenuLink span {
-    color: #3ea175 !important;
+    color: var(--primary-dark);
 }
 
 .sidebarLink>a {
     text-decoration: none;
-    color: #a5aaad;
+    color: var(--primary);
     font-weight: 700;
+}
+.sidebarLink>a:hover{
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 700;
+
 }
 
 .sidebarLink>.icon {

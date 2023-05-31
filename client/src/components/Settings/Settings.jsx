@@ -110,15 +110,15 @@ function Settings() {
   return (
     <>
       <Header />
-      <section className="py-5 my-5">
-        <div className="container">
-          <h1 className="mb-5">Account Settings</h1>
-          <div className="bg-white shadow rounded-lg d-block d-sm-flex">
+      <section className="settingMain">
+        <div className="settingContainer">
+          <div className="rounded-lg d-block d-sm-flex">
             <div className="profile-tab-nav border-right">
               <div className="p-4">
                 <div className="img-circle text-center mb-3">
                   <div className={styles.avatar}>
                     <img
+                      alt='img'
                       className={styles.img}
                       src={
                         !user?.avatar?.jpeg
@@ -150,7 +150,7 @@ function Settings() {
                 role="tablist"
                 aria-orientation="vertical">
                 <a
-                  className="nav-link active"
+                  className="nav-link"
                   id="account-tab"
                   data-toggle="pill"
                   href="#account"
@@ -171,7 +171,7 @@ function Settings() {
                 <h3 className="mb-4">Account Settings</h3>
                 <div className="row">
                   <div className="col-md-6">
-                    <div className="form-group">
+                    <div className="form-group-settings">
                       <label>Full Name</label>
                       <input
                         onChange={handleChange}

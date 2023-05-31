@@ -59,6 +59,9 @@
   position: absolute;
   left: 4%;
 }
+.navbarSpann:hover {
+  text-decoration: none;
+}
 
 .navbar-span {
   text-decoration: none;
@@ -72,11 +75,15 @@
   transition: 0.3s ease;
   font-weight: 500;
 }
+.navbar-span:hover{
+  text-decoration: none;
+
+}
 
 .navbar-link-home {
   text-decoration: none !important;
 }
-.navbar-span:hover{
+.navbar-span:hover {
   color: var(--primary);
 }
 

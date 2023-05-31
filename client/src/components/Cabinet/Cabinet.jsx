@@ -27,27 +27,30 @@ export default function Cabinet() {
           <div className="pageTab">
             <div
               onClick={() => handleactiveToggle()}
-              className={`ownAdverts ${active ? 'active' : ''}`}>
+              className={`ownAdverts ${active ? "active" : ""}`}
+            >
               Ads
             </div>
           </div>
           <div className="tabBody">
             <div className="tabBar">
-              <Link to={'/cabinet/active'}>
+              <Link to={"/cabinet/active"}>
                 <div
                   className={`activeBar ${
-                    activeButton === 'active' ? 'active' : ''
+                    activeButton === "active" ? "active" : ""
                   }`}
-                  onClick={() => handleActiveTabToggle('active')}>
+                  onClick={() => handleActiveTabToggle("active")}
+                >
                   Active
                 </div>
               </Link>
-              <Link to={'/cabinet/inactive'}>
+              <Link to={"/cabinet/inactive"}>
                 <div
                   className={`inActiveBar ${
-                    activeButton === 'inactive' ? 'active' : ''
+                    activeButton === "inactive" ? "active" : ""
                   }`}
-                  onClick={() => handleActiveTabToggle('inactive')}>
+                  onClick={() => handleActiveTabToggle("inactive")}
+                >
                   Inactive
                 </div>
               </Link>
@@ -56,11 +59,13 @@ export default function Cabinet() {
               <div className="notFound">
                 You do not have any active postings at this time.
               </div>
-              <button className="adBtn">Post an Ad</button>
+              <button className="adBtn">
+                <Link to={"/my/cabinet/add/new/product"}> Post an Ad</Link>
+              </button>
             </div>
           </div>
         </div>
       </div>
     </>
-  )
+  );
 }

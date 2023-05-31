@@ -4,6 +4,7 @@ import React from 'react'
 import Header from '../components/Header/Header'
 import ProductCard from '../components/ProductCard/ProductCard'
 import Banner from '../components/Baner/Baner'
+import Footer from '../components/Footer/Footer'
 
 export default function NavBarLayout() {
   return (
@@ -12,6 +13,7 @@ export default function NavBarLayout() {
       <Banner />
       <ProductCard />
       <Outlet />
+      <Footer />
     </div>
   )
 }

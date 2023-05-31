@@ -77,7 +77,7 @@ const Banner = () => {
     <div className={styles.carousel}>
       <Slider {...settings}>
         {banners.map((item) => (
-          <div key={item.id}>
+          <div key={item.id} className={styles.slides}>
             <div className={styles.slide}>
               <img src={item?.img?.jpeg} alt="Banner" />
             </div>

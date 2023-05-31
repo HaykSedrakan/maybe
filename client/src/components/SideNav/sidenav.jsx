@@ -37,8 +37,8 @@ const SideNavigation = () => {
   }
 
   const drawerStyle = {
-    background: '#000',
-  }
+    background: "#c8d0e7",
+  };
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -61,8 +61,9 @@ const SideNavigation = () => {
         variant="persistent"
         anchor="left"
         open={open}
-        PaperProps={{ style: drawerStyle }}>
-        <Box p={2} width="350px">
+        PaperProps={{ style: drawerStyle }}
+      >
+        <Box p={2} width="280px">
           <StyledDrawerHeader>
             <IconButton onClick={handleDrawerClose}>
               <ChevronLeftIcon />
@@ -70,10 +71,10 @@ const SideNavigation = () => {
           </StyledDrawerHeader>
           <List>
             <ListItem button>
-              <ListItemIcon style={{ color: '#6d5dfc' }}>
+              <ListItemIcon style={{ color: "#6d5dfc" }}>
                 <CategoryIcon />
               </ListItemIcon>
-              <ListItemText primary="Categories" style={{ color: 'white' }} />
+              <ListItemText primary="Categories" style={{ color: "#5b0eeb" }} />
             </ListItem>
             <List component="div" disablePadding>
               {categories !== [] &&
@@ -82,7 +83,7 @@ const SideNavigation = () => {
                     <ListItem button component={Link} to="/catagories/cars">
                       <ListItemText
                         primary={item?.category}
-                        style={{ color: 'white' }}
+                        style={{ color: "#5b0eeb" }}
                       />
                     </ListItem>
                   </>
@@ -97,11 +98,12 @@ const SideNavigation = () => {
         aria-label="open drawer"
         edge="start"
         onClick={handleDrawerOpen}
-        style={{ color: '#6d5dfc' }}>
+        style={{ color: "#5b0eeb" }}
+      >
         <MenuOpenIcon />
       </IconButton>
     </>
-  )
+  );
 }
 
 export default SideNavigation

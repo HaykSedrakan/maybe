@@ -81,7 +81,7 @@ function Active() {
   async function handleDeleteProduct(id) {
     try {
       await axios.delete(`${process.env.REACT_APP_API}/deleteproduct/${id}`)
-      // .then(() => window.location.reload())
+      .then(() => window.location.reload())
     } catch (error) {
       console.log(error)
     }

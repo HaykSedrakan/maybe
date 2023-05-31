@@ -51,7 +51,7 @@ export default function Header() {
   }
 
   const handleNavigate = () => {
-    navigate('/login/auth')
+    navigate('/login')
   }
 
   const selectStyles = {
@@ -82,7 +82,7 @@ export default function Header() {
         </div>
         <div className="navbar-div">
           <Link className="navbar-span" to="/">
-            <span>SellSpot</span>
+            <span className='navbarSpann'>SellSpot</span>
           </Link>
           {/* <span className="navbar-span">Contact</span> */}
         </div>
@@ -145,7 +145,6 @@ export default function Header() {
           </div>
         </div>
       </header>
-      {/* <Banner /> */}
     </>
   )
 }
