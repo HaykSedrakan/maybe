@@ -42,6 +42,7 @@
   align-items: center;
   color: var(--primary);
 }
+
 .show-type__icons,
 .sorts {
   display: flex;
@@ -64,16 +65,19 @@
   align-items: center;
   width: 60px;
 }
+
 .row-icon {
   font-size: 27px;
   cursor: pointer;
   transition: 0.3s ease;
 }
+
 .cell-icon {
   font-size: 22px;
   transition: 0.3s ease;
   cursor: pointer;
 }
+
 .row-icon:hover,
 .cell-icon:hover {
   //   color: var(--primary-dark);
@@ -88,6 +92,7 @@
   align-items: center;
   font-size: 18px;
 }
+
 .currency,
 .catagory {
   cursor: pointer;
@@ -96,6 +101,7 @@
 .adverts-div {
   margin-top: 30px;
 }
+
 .adverts-title {
   font-size: 15px;
   font-weight: bold;
@@ -139,6 +145,7 @@
   font-size: 16px;
   color: #222;
 }
+
 .price-div {
   font-size: 15px;
   font-weight: 700;
@@ -163,4 +170,13 @@
 
 .info-div {
   transition: 0.2s;
+}
+
+
+.dropDownItem {
+  text-decoration: none !important;
+}
+
+.dropdown {
+  background-color: red;
 }
