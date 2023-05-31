@@ -6,8 +6,6 @@ import { ImLocation } from 'react-icons/im'
 export default function MyFavorites() {
   const { isAuth, user } = useUser()
 
-  console.log(user)
-
   return (
     <>
       <Header />
@@ -19,12 +17,12 @@ export default function MyFavorites() {
                 <div className={styles.imgContainer}>
                   <img
                     className={styles.imgContainer_img}
-                    src={item?.image}
+                    src={item?.img[0]?.jpeg}
                     alt=""
                   />
                 </div>
                 <div className={styles.infoContainer}>
-                  <div className={styles.cardTitle}>{item?.label}</div>
+                  <div className={styles.cardTitle}>{item?.title}</div>
                   <div className={styles.priceContainer}>
                     <p className={styles.priceContainer_price}>
                       {item?.currency} {item?.price}

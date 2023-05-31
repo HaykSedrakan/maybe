@@ -14,7 +14,9 @@ import SettingsIcon from '@mui/icons-material/Settings'
 import InfoIcon from '@mui/icons-material/Info'
 import axios from 'axios'
 import { Box } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { setCategory } from '../../redux/category/categoryActions'
 
 const StyledDrawerHeader = styled.div`
   background-color: #6d5dfc;
@@ -25,6 +27,9 @@ const StyledDrawerHeader = styled.div`
 `
 
 const SideNavigation = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const category = useSelector((state) => state.category.category)
   const [categories, setCategories] = useState([])
   const [open, setOpen] = useState(false)
 
@@ -55,6 +60,12 @@ const SideNavigation = () => {
     fetchCategories()
   }, [])
 
+  const handleChangeCategory = (value) => {
+    dispatch(setCategory(value))
+    navigate('/product/search')
+    setOpen(false)
+  }
+
   return (
     <>
       <Drawer
@@ -79,7 +90,8 @@ const SideNavigation = () => {
               {categories !== [] &&
                 categories.map((item) => (
                   <>
-                    <ListItem button component={Link} to="/catagories/cars">
+                    <ListItem
+                      onClick={() => handleChangeCategory(item?.category)}>
                       <ListItemText
                         primary={item?.category}
                         style={{ color: 'white' }}

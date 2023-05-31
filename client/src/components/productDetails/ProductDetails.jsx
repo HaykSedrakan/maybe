@@ -5,17 +5,19 @@ import { MdLocationPin } from 'react-icons/md'
 import { FaUserCircle } from 'react-icons/fa'
 import { HiCheck } from 'react-icons/hi'
 import { FaHeart, FaCheck } from 'react-icons/fa'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
 
 import styles from './ProductDetails.module.css' // ...
+import useUser from '../../hooks/useUser'
 
 export default function ProductDetails() {
   const { pathname } = useLocation()
   const [product, setProduct] = useState([])
   const [isActive, setIsActive] = useState(false)
   const [similarItems, setSimilarItems] = useState([])
-  const [user, setUser] = useState([])
+  const [productUser, setUser] = useState([])
+  const { isAuth, user } = useUser()
 
   const toggleClass = () => {
     setIsActive(!isActive)
@@ -111,7 +113,33 @@ export default function ProductDetails() {
     }
     fetchSimilarItems()
   }, [product?.category, productId])
+
+  useEffect(() => {
+    user?.favourite?.filter((item) => item.id == product.id)
+  }, [productId])
+
   console.log(user)
+
+  async function addFavourite(id) {
+    try {
+      await axios
+        .post(`${process.env.REACT_APP_API}/addFavourite/user/${id}`, {
+          favourite:
+            product && Array.isArray(user.favourite)
+              ? JSON.stringify([...user.favourite, product])
+              : JSON.stringify([product]),
+        })
+        .then(() => console.log('Adding with favourite'))
+        .catch((err) => console.log(err))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // useEffect(() => {
+  //   window.location.reload()
+  // }, [productId])
+
   return (
     <>
       <Header />
@@ -133,28 +161,34 @@ export default function ProductDetails() {
                     className={
                       !isActive ? styles.favIcon : styles.favIconActive
                     }
+                    onClick={() => addFavourite(user?.id)}
                   />
                 </div>
                 <div className={styles.userInfo}>
                   {/* <div className={styles.userImg}> */}
                   <img
                     className={styles.avatar}
-                    src={user && user.avatar && user?.avatar?.jpeg}
+                    src={
+                      productUser &&
+                      productUser.avatar &&
+                      productUser?.avatar?.jpeg
+                    }
                     alt="Avatar"
                   />
                   {/* <FaUserCircle className={styles.userIcon} /> */}
                   {/* </div> */}
-                  <div className={styles.userName}>{user?.name}</div>
+                  <div className={styles.userName}>{productUser?.name}</div>
                   <div className={styles.since}>
-                    SellSpot-ում է` {user?.date}
+                    SellSpot-ում է` {productUser?.date}
                   </div>
                 </div>
                 <div className={styles.btns}>
-                  <button
-                    type="button"
+                  <a
+                    // type="button"
+                    href={`tel:+${productUser?.phoneNumber}`}
                     className={`${styles.btn} ${styles.btnNow}`}>
                     Contact
-                  </button>
+                  </a>
                   <button className={`${styles.btn} ${styles.btnFav}`}>
                     Favourite
                   </button>
@@ -179,18 +213,22 @@ export default function ProductDetails() {
                 <div className={styles.samilarProducts}>
                   {similarItems !== [] &&
                     similarItems.map((item) => (
-                      <div className={styles.samilarProduct}>
-                        <img src={item?.img[0]?.jpeg} alt="img" />
-                        <div className={styles.samilarProductText}>
-                          <div className={styles.samilarProductTitle}>
-                            {item?.title}
-                          </div>
-                          <div className={styles.samilarProductPrice}>
-                            {item?.currency}
-                            {item?.price}
+                      <Link
+                        onClick={() => window.scrollTo(0, 0)}
+                        to={`/product/details/${item?.id}`}>
+                        <div className={styles.samilarProduct}>
+                          <img src={item?.img[0]?.jpeg} alt="img" />
+                          <div className={styles.samilarProductText}>
+                            <div className={styles.samilarProductTitle}>
+                              {item?.title}
+                            </div>
+                            <div className={styles.samilarProductPrice}>
+                              {item?.currency}
+                              {item?.price}
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      </Link>
                     ))}
                 </div>
               </div>
