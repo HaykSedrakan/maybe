@@ -19,6 +19,7 @@ import { RotatingLines } from 'react-loader-spinner'
 import { FiX } from 'react-icons/fi'
 import useUser from '../../hooks/useUser'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const currencyData = {
   currency: ['$ (USD)', '֏ (AMD)', '₽ (RUB)'],
@@ -38,6 +39,7 @@ const data = [
 ].map((item) => ({ label: item, value: item }))
 
 export default function AddProductPage() {
+  const navigate = useNavigate()
   const [categories, setCategories] = useState([])
   const { isAuth, user } = useUser()
   const [img, setImg] = useState([])
@@ -95,6 +97,7 @@ export default function AddProductPage() {
         })
         .then(() => {
           setActiveClass(true)
+          navigate('/cabinet/active')
         })
     } catch (error) {
       console.log(error)

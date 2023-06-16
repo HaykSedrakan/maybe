@@ -2,9 +2,16 @@ import useUser from '../../hooks/useUser'
 import styles from './MyFavorites.module.scss'
 import Header from '../Header/Header'
 import { ImLocation } from 'react-icons/im'
+import { useEffect, useState } from 'react'
+import Loader from '../Loader/Loader'
 
 export default function MyFavorites() {
   const { isAuth, user } = useUser()
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    setLoading(false)
+  }, [isAuth])
 
   return (
     <>
@@ -37,6 +44,7 @@ export default function MyFavorites() {
             ))}
         </div>
       </div>
+      {loading && <Loader />}
     </>
   )
 }

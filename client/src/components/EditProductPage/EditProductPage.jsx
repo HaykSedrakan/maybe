@@ -19,7 +19,7 @@ import { FiX } from 'react-icons/fi'
 import useUser from '../../hooks/useUser'
 import axios from 'axios'
 import '../AddProductPage/Rsuite.css'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const currencyData = {
   currency: ['$ (USD)', '֏ (AMD)', '₽ (RUB)'],
@@ -39,6 +39,7 @@ const data = [
 ].map((item) => ({ label: item, value: item }))
 
 export default function EditProductPage() {
+  const navigate = useNavigate()
   const { pathname } = useLocation()
   const { isAuth, user } = useUser()
   const [img, setImg] = useState([])
@@ -118,8 +119,8 @@ export default function EditProductPage() {
           currency: currency && currency,
         })
         .then(() => {
-          // setTextSendButton('Thanks')
           setActiveClass(true)
+          navigate('/cabinet/active')
         })
     } catch (error) {
       console.log(error)

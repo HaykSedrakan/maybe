@@ -13,7 +13,7 @@ const app = express()
 
 app.use(express.json())
 app.use(cors({
-    origin: ["http://localhost:3000", `${process.env.REACT_APP_API}`],
+    origin: ["http://localhost:3001", `${process.env.REACT_APP_API}`],
     methods: ["PUT", "POST", "GET", "DELETE"],
     credentials: true
 }));

@@ -164,10 +164,6 @@
 //     stroke-linecap: round;
 // }
 
-.active {
-    background: #ff2b75;
-    transition: 1s;
-}
 
 .active .checkBox {
     right: 0;
@@ -211,25 +207,21 @@
     font-size: 20px;
 }
 
-@keyframes animate-line {
-    0% {
-        width: 300px;
-    }
 
-    100% {
-        width: 60px;
-        border-bottom-color: transparent;
-        border-right-color: transparent;
-    }
-
+.btn {
+    // width: 100px;
+    // height: 60px;
+    padding: 12px 24px;
+    border-radius: 10px;
+    border: 2px solid var(--primary);
+    background-color: #fff;
+    color: var(--primary);
+    outline: none;
+    cursor: pointer;
+    font-size: 20px;
+    margin-bottom: 10px;
 }
 
-@keyframes spinner {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
+.btn:disabled {
+    cursor: not-allowed;
 }

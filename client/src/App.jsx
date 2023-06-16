@@ -23,8 +23,8 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<NavBarLayout />} />
-        <Route path="/login" element={<LoginPage />} />{" "}
-        <Route path="/signup" element={<SignUp />} />{" "}
+        <Route path="/login" element={<LoginPage />} />{' '}
+        <Route path="/signup" element={<SignUp />} />{' '}
         <Route path="/product/details/:id" element={<ProductDetails />} />
         <Route path="/user/:id/account/settings" element={<Settings />} />
         <Route path="/edit/product/:id" element={<EditProductPage />} />
@@ -47,10 +47,10 @@ function App() {
             element={<AdminBanners />}
           />
         </Route>
-        <Route path="*" element={<NotFound />} />{" "}
+        <Route path="*" element={<NotFound />} />{' '}
       </Routes>
     </>
-  );
+  )
 }
 
 export default App

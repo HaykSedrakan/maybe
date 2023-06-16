@@ -6,9 +6,14 @@ import { HiCheck } from 'react-icons/hi'
 import { FaHeart, FaCheck } from 'react-icons/fa'
 import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
-
+import Alert from '@mui/material/Alert'
+import CheckIcon from '@mui/icons-material/Check'
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
+import Stack from '@mui/material/Stack'
 import styles from './ProductDetails.module.css' // ...
 import useUser from '../../hooks/useUser'
+import { toast, ToastContainer } from 'react-toastify'
+import Loader from '../Loader/Loader'
 
 export default function ProductDetails() {
   const { pathname } = useLocation()
@@ -16,6 +21,7 @@ export default function ProductDetails() {
   const [isActive, setIsActive] = useState(false)
   const [similarItems, setSimilarItems] = useState([])
   const [productUser, setUser] = useState([])
+  const [loading, setLoading] = useState(true)
   const { isAuth, user } = useUser()
 
   const toggleClass = () => {
@@ -25,6 +31,13 @@ export default function ProductDetails() {
   const productId = pathname.split('/')[3]
 
   useEffect(() => {
+    const isActive = user?.favourite?.some((item) => +item.id === +product.id)
+
+    setIsActive(isActive)
+  }, [isAuth])
+
+  useEffect(() => {
+    setLoading(true)
     const fetchProduct = async () => {
       try {
         const res = await axios.get(`${process.env.REACT_APP_API}/productsNew`)
@@ -47,8 +60,10 @@ export default function ProductDetails() {
               }
             })
         setProduct(filteredProduct[0])
+        setLoading(false)
       } catch (error) {
         console.log(error)
+        setLoading(false)
       }
     }
     fetchProduct()
@@ -128,16 +143,15 @@ export default function ProductDetails() {
               ? JSON.stringify([...user.favourite, product])
               : JSON.stringify([product]),
         })
-        .then(() => console.log('Adding with favourite'))
+        .then(() => toast.success('Adding with favourite'), {
+          position: toast.POSITION.BOTTOM_LEFT,
+        })
+
         .catch((err) => console.log(err))
     } catch (error) {
       console.log(error)
     }
   }
-
-  // useEffect(() => {
-  //   window.location.reload()
-  // }, [productId])
 
   return (
     <>
@@ -188,9 +202,6 @@ export default function ProductDetails() {
                     className={`${styles.btn} ${styles.btnNow}`}>
                     Contact
                   </a>
-                  <button className={`${styles.btn} ${styles.btnFav}`}>
-                    Favourite
-                  </button> 
                 </div>
               </div>
               <div className={styles.additions}>
@@ -238,16 +249,16 @@ export default function ProductDetails() {
               <div className={styles.productPrice}>
                 <p className={styles.price}>
                   <span>
-                    {product?.currency === "$ (USD)" ? "$" : "֏"}
+                    {product?.currency === '$ (USD)' ? '$' : '֏'}
                     {product?.price
                       ?.toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
                   </span>
                 </p>
               </div>
               <div className={styles.productLocation}>
                 <span className={styles.location}>
-                  <MdLocationPin className={styles.locIcon} />{" "}
+                  <MdLocationPin className={styles.locIcon} />{' '}
                 </span>
                 <span className={styles.locName}>{product?.location}</span>
               </div>
@@ -262,6 +273,8 @@ export default function ProductDetails() {
           </div>
         </div>
       </div>
+      <ToastContainer />
+      {loading && <Loader />}
     </>
-  );
+  )
 }

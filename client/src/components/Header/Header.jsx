@@ -46,7 +46,7 @@ export default function Header() {
         withCredentials: true,
         sameSite: 'none',
       })
-      .then(() => console.log('User has been logout successfully!'))
+      .then(() => window.location.reload())
       .catch((err) => console.log(err))
   }
 
@@ -82,7 +82,7 @@ export default function Header() {
         </div>
         <div className="navbar-div">
           <Link className="navbar-span" to="/">
-            <span className='navbarSpann'>SellSpot</span>
+            <span className="navbarSpann">SellSpot</span>
           </Link>
           {/* <span className="navbar-span">Contact</span> */}
         </div>
@@ -91,9 +91,15 @@ export default function Header() {
         </div>
 
         <div className="icons-div">
-          <div className="lang-div">
-            <DropDownLanguage />
-          </div>
+          {isAuth && (
+            <div className="lang-div">
+              <button className="adBtnHeader">
+                <Link to={'/my/cabinet/add/new/product'} className="width">
+                  Post an Ad
+                </Link>
+              </button>
+            </div>
+          )}
           <div className={styles.userDiv}>
             <div className={styles.action} onClick={handleClickMenu}>
               <div className={styles.profile}>
@@ -107,10 +113,6 @@ export default function Header() {
                 />
               </div>
               <div className={`${styles.menu} ${active && styles.active}`}>
-                <div
-                  className={`${styles.closeDiv} ${active && styles.active}`}>
-                  <GrClose className={styles.closeIcon} />
-                </div>
                 <ul className={styles.menuUl}>
                   {isAuth ? (
                     <>

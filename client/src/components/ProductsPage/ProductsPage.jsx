@@ -230,8 +230,7 @@ export default function ProductsPage() {
                   <div
                     className="advert"
                     onClick={() => handleNavigate(item?.id)}
-                    key={item?.id}
-                  >
+                    key={item?.id}>
                     <div className="img-div">
                       <img
                         alt="img"
@@ -242,13 +241,13 @@ export default function ProductsPage() {
                     <div className="info-div">
                       <div className="title-div">{item?.title}</div>
                       <div className="price-div">
-                        {item?.currency === "$ (USD)" ? "$" : "֏"}
+                        {item?.currency === '$ (USD)' ? '$' : '֏'}
                         {item?.price
                           .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
                       </div>
                       <div className="location-div">
-                        {<MdLocationPin className="location-icon" />}{" "}
+                        {<MdLocationPin className="location-icon" />}{' '}
                         <span className="location-title">{item?.location}</span>
                       </div>
                     </div>
@@ -285,5 +284,5 @@ export default function ProductsPage() {
         </div>
       </div>
     </>
-  );
+  )
 }

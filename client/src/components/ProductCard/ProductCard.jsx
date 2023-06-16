@@ -4,12 +4,15 @@ import axios from 'axios'
 // import 'bootstrap/dist/css/bootstrap.min.css'
 import 'font-awesome/css/font-awesome.min.css'
 import { Link, useNavigate } from 'react-router-dom'
+import Loader from '../Loader/Loader'
 
 const ProductCard = () => {
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(true)
   const [products, setProducts] = useState([])
 
   useEffect(() => {
+    setLoading(true)
     const fetchProducts = async () => {
       try {
         const res = await axios.get(`${process.env.REACT_APP_API}/productsNew`)
@@ -29,8 +32,10 @@ const ProductCard = () => {
             }
           })
         parsedDatas && setProducts(parsedDatas.slice(0, 15))
+        setLoading(false)
       } catch (error) {
         console.log(error)
+        setLoading(false)
       }
     }
     fetchProducts()
@@ -48,8 +53,7 @@ const ProductCard = () => {
             <div
               onClick={() => handleNavigate(item?.id)}
               className={styles.card}
-              key={item.id}
-            >
+              key={item.id}>
               <img
                 className={styles.img}
                 src={item?.img[0]?.jpeg}
@@ -57,17 +61,18 @@ const ProductCard = () => {
               />
               <div className={styles.cardContent}>
                 <div className={styles.price}>
-                  {" "}
-                  {item?.currency === "$ (USD)" ? "$" : "֏"}{" "}
-                  {item?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+                  {' '}
+                  {item?.currency === '$ (USD)' ? '$' : '֏'}{' '}
+                  {item?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
                 </div>
                 <div className={styles.title}>{item?.title}</div>
               </div>
             </div>
           ))}
       </div>
+      {loading && <Loader />}
     </>
-  );
+  )
 }
 
 export default ProductCard
